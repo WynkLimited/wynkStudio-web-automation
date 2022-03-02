@@ -1,0 +1,21 @@
+<settings>
+  <profiles>
+   <profile>
+     <id>send-mail</id>
+     <activation>
+       <activeByDefault>true</activeByDefault>
+     </activation>
+     <properties>
+       <mail.username>bot.atv@wynk.in</mail.username>
+       <mail.password>atv@1234</mail.password>
+     </properties>
+   </profile>
+  </profiles>
+  <servers>
+    <server>
+     <id>test-framework</id>
+     <username>prateek.ladha_wynk.in</username>
+     <password>prateek</password>
+    </server>
+  </servers>
+</settings>
