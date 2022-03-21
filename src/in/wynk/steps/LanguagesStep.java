@@ -50,7 +50,7 @@ public class LanguagesStep {
         languagePage.clickOnSubmit();
         languagePage.sleep(3000);
         languagePage.getDriver().navigate().refresh();
-        commonPage.navigateToPage(CommonPage.navigationOption.LANGUAGE);
+      //  commonPage.navigateToPage(CommonPage.navigationOption.LANGUAGE);
         List<String> uiLang = languagePage.getSelectedLang();
         Response response = api.hitUserProfileConfigAPI((String) languagePage.getGDValue(mobileNumber));
         String langValueFromAPI = response.path("userInfo.lang").toString().replace("[", "").replace("]", "").trim();
@@ -97,7 +97,7 @@ public class LanguagesStep {
         languagePage.selectedMaximumLanguage(maxLangCount);
         Assert.assertTrue(languagePage.getSelectedLang().size() == maxLangCount);
         languagePage.clickOnSubmit();
-        commonPage.navigateToPage(CommonPage.navigationOption.LANGUAGE);
+      //  commonPage.navigateToPage(CommonPage.navigationOption.LANGUAGE);
         Assert.assertTrue(languagePage.getSelectedLang().size() == maxLangCount);
 
     }
@@ -128,7 +128,7 @@ public class LanguagesStep {
     public void select_default_langugae(String defaultLang) {
         languagePage.setDefaultLanguage((String) languagePage.getGDValue(defaultLang));
         languagePage.updateLanguage();
-        commonPage.navigateToPage(CommonPage.navigationOption.LANGUAGE);
+       // commonPage.navigateToPage(CommonPage.navigationOption.LANGUAGE);
         Assert.assertTrue(languagePage.getSelectedLang().size() == 1 && languagePage.getSelectedLang().get(0).equals((String) languagePage.getGDValue(defaultLang)));
     }
 

@@ -6,43 +6,62 @@ import in.wynk.common.DriverActionUtils;
 import in.wynk.framework.Driver;
 import in.wynk.framework.Reporting;
 
-public class StudioHomePage extends DriverActionUtils {
+public class ArtistHomePage extends DriverActionUtils {
 
-    ArtistHomeElements studioHomeElements;
+    ArtistHomeElements artistHomeElements;
     CommonElements commonElements;
 
-    public StudioHomePage(Reporting Reporter, in.wynk.framework.Assert Assert,
-                          in.wynk.framework.SoftAssert SoftAssert, ThreadLocal<Driver.HashMapNew> sTestDetails, ArtistHomeElements studioHomeElements,
+    public ArtistHomePage(Reporting Reporter, in.wynk.framework.Assert Assert,
+                          in.wynk.framework.SoftAssert SoftAssert, ThreadLocal<Driver.HashMapNew> sTestDetails, ArtistHomeElements artistHomeElements,
                           CommonElements commonElements )
     {
         super(Reporter, Assert, SoftAssert, sTestDetails);
-        this.studioHomeElements = studioHomeElements;
+        this.artistHomeElements = artistHomeElements;
         this.commonElements = commonElements;
     }
 
-    public boolean isAllSong_RejectedTabPresent()
-    {
-        return isElementDisplayed( commonElements.getAllDraftLiveRejectDraftTabStudioPageHomePage(), "All Song..Rejected Tab",true);
-    }
 
-    public boolean isAllSongsStudioPagePresent()
-    {
-        return isElementDisplayed( commonElements.getAllSongsPodcastdivHomePage(), "All Song Tab",true);
-    }
-
-    public int getTotalSongsInStudioHome()
-    {
-       return getWebElementsList(commonElements.getAllSongPodcastListHomePage()).size();
-    }
 
     public boolean isNewReleaseButtonPresent()
     {
-        return isElementDisplayed(studioHomeElements.getNewReleaseButtonStudioPage(), "New release button",true);
+        return isElementDisplayed(artistHomeElements.getNewReleaseButtonArtistPage(), "New release button",true);
     }
 
-    public boolean isProfileButtonPresent()
+    public boolean isHeadingOnStudioPage()
     {
-        return isElementDisplayed( commonElements.getProfileButton(), "profile button",true);
+        return isElementDisplayed(artistHomeElements.getHeadingOnArtistPage(), "Heading on artist home page",true);
     }
+
+    public boolean isHomeButtonArtistHomePagePresent()
+    {
+        return isElementDisplayed(artistHomeElements.getHomeButtonArtistPage(), "Home Button on ArtistHome ",true);
+    }
+
+    public void clickHomeButtonArtistHomePagePresent()
+    {
+         click(artistHomeElements.getHomeButtonArtistPage(), "Home Button on ArtistHome ",true);
+    }
+
+    public boolean isStudioButtonArtistHomePagePresent()
+    {
+        return isElementDisplayed(artistHomeElements.getStudioButtonArtistPage(), "Home Button on ArtistHome ",true);
+    }
+
+    public void clickStudioButtonArtistHomePagePresent()
+    {
+        click(artistHomeElements.getStudioButtonArtistPage(), "Home Button on ArtistHome ",true);
+    }
+
+    public boolean isDashboardButtonArtistHomePagePresent()
+    {
+        return isElementDisplayed(artistHomeElements.getDashboardButtonArtistPage(), "Home Button on ArtistHome ",true);
+    }
+
+    public void clickDashboardButtonArtistHomePagePresent()
+    {
+        click(artistHomeElements.getDashboardButtonArtistPage(), "Home Button on ArtistHome ",true);
+    }
+
+
 
 }

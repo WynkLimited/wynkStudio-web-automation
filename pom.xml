@@ -388,6 +388,15 @@
 		<artifactId>jackson-dataformat-xml</artifactId>
 		<version>${jackson.version}</version>
 	</dependency>
+
+	  <!-- https://mvnrepository.com/artifact/com.manybrain/mailinator-client -->
+	  <dependency>
+		  <groupId>com.manybrain</groupId>
+		  <artifactId>mailinator-client</artifactId>
+		  <version>1.6</version>
+	  </dependency>
+
+
   </dependencies>
   <repositories>
 		<repository>

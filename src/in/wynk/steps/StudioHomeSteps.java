@@ -1,2 +1,4 @@
-package in.wynk.steps;public class StudioHomeSteps {
+package in.wynk.steps;
+
+public class StudioHomeSteps {
 }

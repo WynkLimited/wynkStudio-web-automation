@@ -30,7 +30,7 @@ public class WatchlistStep {
 
     @Then("Verify content (.+) added into watchlist")
     public void verify_content_contentName_added_into_watchlist(String contentName) {
-        commonPage.navigateToPage(CommonPage.navigationOption.HOME);
+     //   commonPage.navigateToPage(CommonPage.navigationOption.HOME);
        Assert.assertTrue( "content is not added in watchlist " ,homePage.verifyIfContentIsAddedToWatchlist(contentName));
     }
 

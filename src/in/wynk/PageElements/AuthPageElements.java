@@ -2,10 +2,7 @@ package in.wynk.PageElements;
 
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindAll;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.How;
+
 
 @Getter
 public class AuthPageElements {
@@ -14,7 +11,7 @@ public class AuthPageElements {
     private By emailAddressTextBox = By.cssSelector(".style__Container-sc-1pzdtrh-0 > .ant-input");
     private By passwordTextBox = By.cssSelector(".ant-input-affix-wrapper > .ant-input");
     private By loginButton = By.xpath("//span[@class='svgicon__IconWrapper-sc-gxfrqa-0 hzltSc icon ctaIcon']");
-    private By fullNameTextBox = By.xpath("//input[@placeholder='Your full name']");
+    private By fullNameTextBox = By.cssSelector("#registerForm_name .ant-input");
     private By createAccountButton = By.xpath("//span[contains(.,'Create Account')]");
     private By termsAndConditions = By.cssSelector("strong > strong");
     private By notificationCrossButton =By.cssSelector(".anticon-close > svg");
@@ -28,5 +25,11 @@ public class AuthPageElements {
             = By.xpath("//div[@class='ant-notification ant-notification-topRight']//div[contains(text(),'No registered user found with given email')]");
     private By emailSentNotification =
             By.xpath("//div[@class='ant-notification ant-notification-topRight']//div[contains(text(),'Email sent successfully')]");
+
+    private By verificationErrorMsg = By.xpath("//h5[@class='s3styled__S3-sc-85vhak-0 style__StyledS3-sc-1hahjst-20 kGsEfG cIUfYj'][1]");
+    private By sendMeLinkAgainOnverificationErrorPage =
+            By.xpath("//button[@class='ant-btn ant-btn-default ant-btn-round ant-btn-sm ant-btn-block']");
+
+
 }
 

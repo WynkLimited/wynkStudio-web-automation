@@ -547,34 +547,32 @@ public class CommonPage extends DriverActionUtils {
         launchUrl(sTestDetails.get().get("APP_URL") + path, true);
     }
 
-    public static enum navigationOption {SEARCH, HOME, LIVETV, TVSHOWS, MOVIES, LANGUAGE, MORE , NEWS}
+    public static enum navigationOption {HOME,LOGIN, REGISTER}
 
     public void navigateToPage(navigationOption navigationOption) {
         switch (navigationOption) {
-            case SEARCH:
-                launchUrl(sTestDetails.get().get("APP_URL") + "/search", true);
-                break;
             case HOME:
-                launchUrl(sTestDetails.get().get("APP_URL"), true);
-                //    click(homeButton, "HOME",2);
+                String x = sTestDetails.get().get("APP_URL");
+                launchUrl(sTestDetails.get().get("APP_URL") , true);
                 break;
-            case LIVETV:
-                launchUrl(sTestDetails.get().get("APP_URL") + "/livetv-channels", true);
+
+            case REGISTER:
+                launchUrl(sTestDetails.get().get("APP_URL")+"/register", true);
                 break;
-            case TVSHOWS:
-                launchUrl(sTestDetails.get().get("APP_URL") + "/tv-shows", true);
+
+
+                case LOGIN:
+                launchUrl(sTestDetails.get().get("APP_URL")+"/login" , true);
                 break;
-            case MOVIES:
-                launchUrl(sTestDetails.get().get("APP_URL") + "/movies", true);
-                break;
-            case LANGUAGE:
-                launchUrl(sTestDetails.get().get("APP_URL") + "/language", true);
-                break;
-            case NEWS:
-                launchUrl(sTestDetails.get().get("APP_URL") + "/news", true);
-                break;
+
         }
 
+    }
+
+    public void navigateToPage(String verificationLink)
+    {
+
+        launchUrl(verificationLink , true);
     }
 
 }

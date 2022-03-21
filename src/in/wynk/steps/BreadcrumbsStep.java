@@ -204,9 +204,9 @@ public class BreadcrumbsStep {
 
     }
 
-    @When("^Navigate To More Page$")
-    public void NavigateToMorePage() throws InterruptedException {
-        commonPage.navigateToPage(CommonPage.navigationOption.MORE);    }
+//    @When("^Navigate To More Page$")
+//    public void NavigateToMorePage() throws InterruptedException {
+//        commonPage.navigateToPage(CommonPage.navigationOption.MORE);    }
 
     @Then("Verify respected tabs should be selected when played any content(.+)$")
     public void verify_respected_tabs_should_be_selected_when_played_any_content(String path) {
@@ -215,30 +215,30 @@ public class BreadcrumbsStep {
         Assert.assertTrue(playerPage.getContentTypeFromBreadCrumbs().toLowerCase().equals(commonPage.getActiveTab().toLowerCase()));
     }
 
-    @When("^Navigate To Page(.+)$")
-    public void NavigateToPage(String PageName) throws InterruptedException {
-        switch (PageName) {
-            case "HOME PAGE":
-                commonPage.navigateToPage(CommonPage.navigationOption.HOME);
-                break;
-            case "TVSHOWS PAGE":
-                commonPage.navigateToPage(CommonPage.navigationOption.TVSHOWS);
-                break;
-            case "MOVIES PAGE":
-                commonPage.navigateToPage(CommonPage.navigationOption.MOVIES);
-                break;
-            case "LIVETV PAGE":
-                commonPage.getDriver().navigate().refresh();
-                commonPage.navigateToPage(CommonPage.navigationOption.LIVETV);
-                break;
-            case "NEWS PAGE":
-                commonPage.getDriver().navigate().refresh();
-                commonPage.navigateToPage(CommonPage.navigationOption.NEWS);
-                break;
-
-        }
-
-    }
+//    @When("^Navigate To Page(.+)$")
+//    public void NavigateToPage(String PageName) throws InterruptedException {
+//        switch (PageName) {
+//            case "HOME PAGE":
+//                commonPage.navigateToPage(CommonPage.navigationOption.HOME);
+//                break;
+//            case "TVSHOWS PAGE":
+//                commonPage.navigateToPage(CommonPage.navigationOption.TVSHOWS);
+//                break;
+//            case "MOVIES PAGE":
+//                commonPage.navigateToPage(CommonPage.navigationOption.MOVIES);
+//                break;
+//            case "LIVETV PAGE":
+//                commonPage.getDriver().navigate().refresh();
+//                commonPage.navigateToPage(CommonPage.navigationOption.LIVETV);
+//                break;
+//            case "NEWS PAGE":
+//                commonPage.getDriver().navigate().refresh();
+//                commonPage.navigateToPage(CommonPage.navigationOption.NEWS);
+//                break;
+//
+//        }
+//
+//    }
     @Then("Verify Root of Page for BreadCrumb(.+)")
     public void verify_Root_of_Page_for_BreadCrumb(String path) throws Exception {
         commonPage.openURL(path.trim());

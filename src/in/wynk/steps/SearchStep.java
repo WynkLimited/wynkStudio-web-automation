@@ -21,7 +21,7 @@ public class SearchStep {
     @Given("^User search for content (.+)$")
     public void user_search_for_content(String contentName) throws Exception {
         contentName = (String) searchPage.getGDValue(contentName);
-        commonPage.navigateToPage(CommonPage.navigationOption.SEARCH);
+       // commonPage.navigateToPage(CommonPage.navigationOption.SEARCH);
         searchPage.typeString(contentName);
 //    searchPage.clickSearchButton();
         searchPage.clickSearchedContent(contentName);

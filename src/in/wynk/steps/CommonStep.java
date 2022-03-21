@@ -33,10 +33,10 @@ public class CommonStep {
         commonPage.sleep(Integer.parseInt(millisecond));
     }
 
-    @When("^Navigate To Search Page$")
-    public void NavigateToSearchPage() {
-        commonPage.navigateToPage(CommonPage.navigationOption.SEARCH);
-    }
+//    @When("^Navigate To Search Page$")
+//    public void NavigateToSearchPage() {
+//        commonPage.navigateToPage(CommonPage.navigationOption.SEARCH);
+//    }
 
 //    @When("^Navigate To Home Page$")
 //    public void NavigateToHomePage()  {
@@ -46,22 +46,22 @@ public class CommonStep {
 
     @When("^Navigate To LiveTV Page$")
     public void NavigateToLiveTVPage() {
-        commonPage.navigateToPage(CommonPage.navigationOption.LIVETV);
+  //      commonPage.navigateToPage(CommonPage.navigationOption.LIVETV);
     }
 
     @When("^Navigate To TV Shows Page$")
     public void NavigateToTVShowsPage() {
-        commonPage.navigateToPage(CommonPage.navigationOption.TVSHOWS);
+    //    commonPage.navigateToPage(CommonPage.navigationOption.TVSHOWS);
     }
 
     @When("^Navigate To Movies Page$")
     public void NavigateToMoviesPage() {
-        commonPage.navigateToPage(CommonPage.navigationOption.MOVIES);
+      //  commonPage.navigateToPage(CommonPage.navigationOption.MOVIES);
     }
 
     @When("^Navigate To Language Page$")
     public void NavigateToLanguagePage() {
-        commonPage.navigateToPage(CommonPage.navigationOption.LANGUAGE);
+    //    commonPage.navigateToPage(CommonPage.navigationOption.LANGUAGE);
     }
 
     @And("Disable wifi connection")

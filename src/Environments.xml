@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ENV>
     <PREPROD>
-        <APP_URL>https://rajtv-preprod.airtelxstream.in/</APP_URL>
+        <APP_URL>https://studio-test.wynk.in</APP_URL>
         <API_MASTER_HOST>https://user-rajtv-preprod.wynk.in</API_MASTER_HOST>
         <LAYOUT_HOST>https://layout-rajtv-preprod.wynk.in/</LAYOUT_HOST>
         <CONTENT_HOST>https://content-rajtv-preprod.wynk.in/</CONTENT_HOST>
