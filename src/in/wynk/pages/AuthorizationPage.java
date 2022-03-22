@@ -125,13 +125,13 @@ public class AuthorizationPage extends DriverActionUtils{
     public void enterEmailOnForgotPasswordPage(String email) throws Exception
     {
         click(elements.getEmaiIdTextBoxForgotPasswordPage(), "Email Text Box on Forgot Password Page" );
-        type((By) elements.getEmaiIdTextBoxForgotPasswordPage(), "Email Text Box on Forgot Password Page", email, 5);
+        type( elements.getEmaiIdTextBoxForgotPasswordPage(), "Email Text Box on Forgot Password Page", email, 5);
     }
 
     public void enterEmailOnForgotPasswordPage() throws Exception
     {
         click(elements.getEmaiIdTextBoxForgotPasswordPage(), "Email Text Box on Forgot Password Page" );
-        type((By) elements.getEmaiIdTextBoxForgotPasswordPage(), "Email Text Box on Forgot Password Page", email, 5);
+        type( elements.getEmaiIdTextBoxForgotPasswordPage(), "Email Text Box on Forgot Password Page", email, 5);
     }
 
 

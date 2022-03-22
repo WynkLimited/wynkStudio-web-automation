@@ -2,14 +2,11 @@ package in.wynk.steps;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import in.wynk.PageElements.CommonElements;
 import in.wynk.common.Utils;
 import in.wynk.framework.MailinatorAPI;
 import in.wynk.framework.SoftAssert;
-
 import in.wynk.pages.*;
 import junit.framework.Assert;
-
 import static java.lang.Thread.sleep;
 
 
@@ -26,9 +23,6 @@ public class AuthorizationSteps {
     PodcastHomePage  podcastHomePage;
     ProfessionPage professionPage;
     String verificationLink =null;
-
-
-
 
 
     public AuthorizationSteps(AuthorizationPage authpage, CommonStudioPage commonStudioPage, SoftAssert anAssert,
@@ -48,11 +42,6 @@ public class AuthorizationSteps {
 
 
 
-//    @Then("Click On Login Button")
-//    public void clickOnLoginButton() {
-//
-//
-//    }
 
     @Then("Click on Create Account")
     public void clickOnCreateAccount() throws Exception {
@@ -273,4 +262,6 @@ public class AuthorizationSteps {
         professionPage.clickLogoutButton();
         sleep(3000);
     }
+
+
 }

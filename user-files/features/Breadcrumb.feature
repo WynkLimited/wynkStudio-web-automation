@@ -1,7 +1,7 @@
 @Breadcrumb
 Feature: Breadcrumbs
 
-  @smoke
+  @sanity
   Scenario Outline:  Verify Root of Page for BreadCrumb
     When Navigate To Home Page
     Then Verify Root of Page for BreadCrumb<contentPath>

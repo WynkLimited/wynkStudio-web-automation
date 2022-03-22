@@ -24,6 +24,11 @@ public class ProfessionPage extends DriverActionUtils {
                 "I am a Music Artist Button",true);
     }
 
+    public void clickIAmAMusicArtistButton()
+    {
+        click(professionPageElements.getIAmAMusicArtistButton(), "I am a Music Artist Button");
+    }
+
 
     public boolean isAmAPodcastCreatorButtonPresent()
     {
@@ -35,6 +40,12 @@ public class ProfessionPage extends DriverActionUtils {
     public boolean isAgencyAndLabelButtonPresent()
     {
         return isElementDisplayed( professionPageElements.getIAmLabelAndAgencyButton(),
+                "I am a Label and Agency Button",true);
+    }
+
+    public boolean isProfilelButtonPresent()
+    {
+        return isElementDisplayed( professionPageElements.getProfileButton(),
                 "I am a Label and Agency Button",true);
     }
 
@@ -60,6 +71,7 @@ public class ProfessionPage extends DriverActionUtils {
     {
         click(professionPageElements.getProfileButton(), "Profile Button");
     }
+
 
 
 
