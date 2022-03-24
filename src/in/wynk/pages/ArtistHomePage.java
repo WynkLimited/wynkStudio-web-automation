@@ -27,6 +27,11 @@ public class ArtistHomePage extends DriverActionUtils {
         return isElementDisplayed(artistHomeElements.getNewReleaseButtonArtistPage(), "New release button",true);
     }
 
+    public void clickNewReleaseButton()
+    {
+         click(artistHomeElements.getNewReleaseButtonArtistPage(), "New release button",true, 10);
+    }
+
     public boolean isHeadingOnStudioPage()
     {
         return isElementDisplayed(artistHomeElements.getHeadingOnArtistPage(), "Heading on artist home page",true);

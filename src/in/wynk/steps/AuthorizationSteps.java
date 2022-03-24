@@ -23,6 +23,7 @@ public class AuthorizationSteps {
     PodcastHomePage  podcastHomePage;
     ProfessionPage professionPage;
     String verificationLink =null;
+    static String emailId = null;
 
 
     public AuthorizationSteps(AuthorizationPage authpage, CommonStudioPage commonStudioPage, SoftAssert anAssert,
@@ -71,17 +72,14 @@ public class AuthorizationSteps {
                 commonStudioPage.isAllSong_RejectedTabPresent());
     }
 
-//    @Given("User open Wynk studio home page")
-//    public void userOpenWynkStudioHomePage() {
-//
-//    }
+
 
     @Given("User open Wynk studio Login page")
     public void userOpenWynkStudioLoginPage() {
 
         commonPage.navigateToPage(CommonPage.navigationOption.LOGIN);
        Assert.assertTrue(authpage.isEmailTextBoxPresent());
-       Assert.assertTrue(authpage.isLoginButtonPresent());
+
     }
 
     @Then("Click on Login")
@@ -140,7 +138,8 @@ public class AuthorizationSteps {
         }
         else if (typeOfUser.equalsIgnoreCase("RUX") || typeOfUser.equalsIgnoreCase("Artist"))
         {
-            authpage.enterEmailOnLoginPage();
+
+            authpage.enterEmailOnLoginPage("chassi.koul@gmail.com");
         }
         else if(typeOfUser.equalsIgnoreCase("Podcast"))
         {
@@ -154,7 +153,8 @@ public class AuthorizationSteps {
     public void enterEmailIdOnRegisterPage() throws Exception {
 
         randomEmail = mailinatorApi.generateRandomUserId();
-        authpage.enterEmailOnRegisterPage(randomEmail+"@team807464.testinator.com");
+        emailId = randomEmail+"@team807464.testinator.com";
+        authpage.enterEmailOnRegisterPage(emailId);
     }
 
     @And("Click on Forgot Password")
@@ -262,6 +262,7 @@ public class AuthorizationSteps {
         professionPage.clickLogoutButton();
         sleep(3000);
     }
+
 
 
 }

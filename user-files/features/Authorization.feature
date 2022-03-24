@@ -56,7 +56,7 @@ Feature: Auth
 
   @Regression
     @Auth
-  Scenario Outline: Verify that user whose email verification is pending is not able to signin
+    Scenario Outline: Verify that user whose email verification is pending is not able to signin
     Given User open Wynk studio Register page
     Then Enter EmailId on Register Page
     And Enter Password

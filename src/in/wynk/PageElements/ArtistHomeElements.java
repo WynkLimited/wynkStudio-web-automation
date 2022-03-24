@@ -14,4 +14,5 @@ public class ArtistHomeElements {
     private By dashboardButtonArtistPage = By.xpath("//a[@class='style__Item-sc-km7t5u-1 hXokMV']");
     private By dashboardButtonFromProfileDropDown = By.xpath("//div[@class='style__StyledMenuItemNonClickable-sc-1y5vx6r-2 kfbabJ']");
     private By logoutButtonFromProfileDropDown = By.xpath("//div[@class='style__StyledMenuItemClickable-sc-1y5vx6r-3 iVHunq']");
+
 }

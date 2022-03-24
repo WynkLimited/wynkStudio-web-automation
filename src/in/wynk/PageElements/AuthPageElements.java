@@ -10,7 +10,7 @@ public class AuthPageElements {
     private By LoginButtonHomePage = By.xpath("//button[@class='style__SecondaryButton-sc-1o736mh-11 kVuEJD']");
     private By emailAddressTextBox = By.cssSelector(".style__Container-sc-1pzdtrh-0 > .ant-input");
     private By passwordTextBox = By.cssSelector(".ant-input-affix-wrapper > .ant-input");
-    private By loginButton = By.xpath("//span[@class='svgicon__IconWrapper-sc-gxfrqa-0 hzltSc icon ctaIcon']");
+    private By loginButton = By.xpath("//form[@id='loginForm']//span[contains(text(),'Login')]");
     private By fullNameTextBox = By.cssSelector("#registerForm_name .ant-input");
     private By createAccountButton = By.xpath("//span[contains(.,'Create Account')]");
     private By termsAndConditions = By.cssSelector("strong > strong");

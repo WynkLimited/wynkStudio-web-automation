@@ -12,9 +12,10 @@ public class AuthorizationPage extends DriverActionUtils{
     CommonPage commonPage;
     in.wynk.framework.Assert anAssert;
     AuthPageElements elements;
-    String password = "Abcd@12345";
+    //String password = "Abcd@12345";
+    String password = "abcdef";
     Utils utility;
-    String email = "karishmakoul2@gmail.com";
+    String email = "auto@team807464.testinator.com";
 
 
     public AuthorizationPage(CommonPage commonPage, Reporting Reporter, in.wynk.framework.Assert Assert,
@@ -105,7 +106,7 @@ public class AuthorizationPage extends DriverActionUtils{
     }
 
     public void clickLoginButtonOnLoginPage() throws Exception {
-        click(elements.getLoginButton(), "PasswordTextBox" );
+        click(elements.getLoginButton(), "Login button" );
     }
 
     public void clickCreateAccountRegisterPage() throws Exception {

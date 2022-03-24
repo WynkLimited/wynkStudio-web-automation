@@ -17,6 +17,10 @@ import java.util.List;
 public class CreateArtistPage  extends DriverActionUtils {
 
     CreateArtistElements createArtistElements;
+    static int countOfFileUploaded = 0;
+    static int counter =0;
+
+
 
     public CreateArtistPage( CreateArtistElements createArtistElements,
                              Reporting Reporter, in.wynk.framework.Assert Assert,
@@ -131,15 +135,29 @@ public class CreateArtistPage  extends DriverActionUtils {
         click(createArtistElements.getCreateNewProfileButton(), "Create New Profile Button",true);
     }
 
-    public void uploadImage() throws Exception
+    public void uploadFirstImage() throws Exception {
+        uploadImage("auto1.jpg");
+    }
+    public void uploadSecondImage() throws Exception {
+        uploadImage("auto2.jpg");
+    }
+    public void uploadThirdImage() throws Exception {
+        uploadImage("auto3.jpg");
+    }
+
+    public void uploadImage(String imageName) throws Exception
     {
+       String filePath ="/Users/b0218201/Documents/Automation Repo/wynkStudio-web-automation/user-files/resources/";
+
+        filePath = filePath+imageName;
+
         String script ="tell application \"System Events\"\n" +
                 "\t--one second delay\n" +
                 "\tdelay 2\n" +
                 "\tkeystroke \"G\" using {command down, shift down}\n" +
                 "\t\n" +
                 "\tdelay 2\n" +
-                "\tkeystroke \"/Users/b0218201/Documents/Automation Repo/wynkStudio-web-automation/user-files/resources/auto.jpg\"\n" +
+                "\tkeystroke \"" +filePath +"\"\n"+
                 "\tdelay 2\n" +
                 "\t\n" +
                 "\tkeystroke return\n" +
@@ -152,11 +170,11 @@ public class CreateArtistPage  extends DriverActionUtils {
         String[] args = { "osascript", "-e", script };
         Process process = runtime.exec(args);
         while(process.isAlive())
-        {
-         System.out.println(process.toString());
+        { //do nothing
         }
 
         process.destroy();
+        sleep(5);
     }
 
     public void clickPhotoUploadAddArtistDetailsPage()
@@ -166,7 +184,7 @@ public class CreateArtistPage  extends DriverActionUtils {
 
     public void clickAddPhotoPlusSignPopUp()
     {
-        click(createArtistElements.getAddPhotoPlusSign(), " Photo Upload + sign Button on pop up on Add Artist Details Page ",true);
+        getElementWhenPresent(createArtistElements.getAddPhotoPlusSign(),25).click();
     }
 
     public void clickDoneButtonOnPopUp()
@@ -175,21 +193,35 @@ public class CreateArtistPage  extends DriverActionUtils {
     }
 
 
-    public String getLinkOfImageUploadedOnPopUp()
-    {
-        sleep(10);
-       return getElementWhenClickable(createArtistElements.getImageUploadedOnPopUp(),6).getAttribute("src");
+    public String getLinkOfFirstImageUploadedOnPopUp() throws InterruptedException {
+        Thread.sleep(10000);
+        checkIfElementPresent(getWebElementsList(createArtistElements.getImageUploadedOnPopUp()).get(0),40);
+        return getWebElementsList(createArtistElements.getImageUploadedOnPopUp()).get(0).getAttribute("src");
     }
+
+    public String getLinkOfSecondImageUploadedOnPopUp() throws InterruptedException
+    {
+        Thread.sleep(8000);
+        checkIfElementPresent(getWebElementsList(createArtistElements.getImageUploadedOnPopUp()).get(1),40);
+        return getWebElementsList(createArtistElements.getImageUploadedOnPopUp()).get(1).getAttribute("src");
+    }
+
+
+    public String getLinkOfThirdImageUploadedOnPopUp() throws InterruptedException {
+        Thread.sleep(10000);
+        checkIfElementPresent(getWebElementsList(createArtistElements.getImageUploadedOnPopUp()).get(1),40);
+        return getWebElementsList(createArtistElements.getImageUploadedOnPopUp()).get(1).getAttribute("src");
+    }
+
+
 
     public String getLinkOfImageUploadedOnAddArtistDetails()
     {
-        sleep(6);
         return getElementWhenClickable(createArtistElements.getImageUploadedOnAddArtistPage(),6).getAttribute("src");
     }
 
-    public boolean ifImageUploadedIsCorrect()
-    {
-        if( getLinkOfImageUploadedOnPopUp().equalsIgnoreCase(getLinkOfImageUploadedOnAddArtistDetails()))
+    public boolean ifImageUploadedIsCorrect() throws InterruptedException {
+        if( getLinkOfFirstImageUploadedOnPopUp().equalsIgnoreCase(getLinkOfImageUploadedOnAddArtistDetails()))
         {
             return true;
         }
@@ -197,22 +229,25 @@ public class CreateArtistPage  extends DriverActionUtils {
     }
 
 
-    public void typeArtistNameInTextBox(String name) throws Exception {
+    public void typeArtistNameInTextBox(String name) throws Exception
+    {
         click(createArtistElements.getTypeYourNameTextBox(), "Email Text Box on Forgot Password Page" );
         type( createArtistElements.getTypeYourNameTextBox(), "Artist Name Text Box on Create or claim Artist Page", name, 5);
     }
 
-    private void selectValueFromDropDown(By locator, String value)
-    {
-        Select select = new Select(getElementWhenClickable(locator, 3));
-        select.selectByValue(value);
+    private void selectValueFromDropDown(By locator, String value) throws Exception {
 
+        click(createArtistElements.getLanguageDropdown(), "Language drop down" , true);
+        click(createArtistElements.getLanguageDropdown2(), "Language drop down" , true);
+       // type( createArtistElements.getLanguageDropdown(), "Language drop down",
+         //       "Hindi", 5);
+      //  click(createArtistElements.getLanguageDropdown(), "Language drop down" , true);
+        click(createArtistElements.getHindiLang(), "Hindi Language drop down" , true);
     }
 
     public static enum dropDownToSelect {NATIONALITY,LANGUAGES, ERA, GENRE, ROLE}
 
-    public void clickDropDownAndSelectValue(dropDownToSelect dropdownName, String value)
-    {
+    public void clickDropDownAndSelectValue(dropDownToSelect dropdownName, String value) throws Exception {
         switch (dropdownName) {
             case NATIONALITY:
                 selectValueFromDropDown(createArtistElements.getNationalityDropDown(), value);
@@ -246,4 +281,27 @@ public class CreateArtistPage  extends DriverActionUtils {
     {
         click(createArtistElements.getContinueButton(),"Continue Button on Add Artist Details Page");
     }
+
+    public void clickYesIprsRadioButton()
+    {
+        click(createArtistElements.getIprsYes(),"Yes IPRS");
+    }
+    public void clickNoIprsRadioButton()
+    {
+        click(createArtistElements.getIprsNo(),"No IPRS");
+    }
+
+    public void typeArtistBio() throws Exception {
+        String bio = "Given User open Wynk studio Register page\n" +
+                "Then Enter EmailId on Register Page\n" +
+                "And  Enter Password\n" +
+                "And  Enter Full Name\n" +
+                "Then Click on Create Account\n" +
+                "And Read verification Link using Mailinator API\n" +
+                "Then Hit verification link sent over mail\n" +
+                "Then Assert User should be on profession page\n" +
+                "Then click on i am a Music Artist\n";
+        type( createArtistElements.getBioTextBox(), "Artist Name Text Box on Create or claim Artist Page", bio, 5);
+    }
+
 }

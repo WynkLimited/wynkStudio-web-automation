@@ -9,6 +9,8 @@ import in.wynk.framework.SoftAssert;
 import in.wynk.pages.*;
 import in.wynk.common.Utils;
 
+import static java.lang.Thread.sleep;
+
 
 public class ArtistCreationSteps {
 
@@ -54,6 +56,7 @@ public class ArtistCreationSteps {
 
     @And("Enter name on Create or claim an artist profile page")
     public void enterNameOnCreateOrClaimAnArtistProfilePage() throws Exception {
+
         createArtistPage.typeArtistNameInTextBox("Rahul");
     }
 
@@ -147,15 +150,11 @@ public class ArtistCreationSteps {
      createArtistPage.clickAddPhotoPlusSignPopUp();
     }
 
-    @And("Upload File")
-    public void uploadFile() throws Exception {
-        createArtistPage.uploadImage();
-    }
+
 
     @And("Click on Done Button in Upload Photo Pop up")
-    public void clickOnDoneButtonInUploadPhotoPopUp()
-    {
-        href1 = createArtistPage.getLinkOfImageUploadedOnPopUp();
+    public void clickOnDoneButtonInUploadPhotoPopUp() throws InterruptedException {
+        href1 = createArtistPage.getLinkOfFirstImageUploadedOnPopUp();
         createArtistPage.clickDoneButtonOnPopUp();
         href2 = createArtistPage.getLinkOfImageUploadedOnAddArtistDetails();
 
@@ -164,6 +163,59 @@ public class ArtistCreationSteps {
     @Then("Assert same image is uploaded on Add Artist Details Page")
     public void assertSameImageIsUploadedOnAddArtistDetailsPage()
     {
-     Assert.assertTrue("image uploaed is not correct",   href1.equalsIgnoreCase(href2));
+        Assert.assertTrue("image uploaed is not correct",   href1.equalsIgnoreCase(href2));
     }
+
+    @Then("Assert First image is uploaded successfully")
+    public void assertFirstImageIsUploadedSuccessfully() throws InterruptedException {
+        Assert.assertNotNull(createArtistPage.getLinkOfFirstImageUploadedOnPopUp());
+    }
+
+    @Then("Assert Second image is uploaded successfully")
+    public void assertSecondImageIsUploadedSuccessfully() throws InterruptedException {
+        Assert.assertNotNull(createArtistPage.getLinkOfSecondImageUploadedOnPopUp());
+    }
+
+    @And("Upload First File")
+    public void uploadFirstFile() throws Exception {
+        createArtistPage.uploadFirstImage();
+    }
+
+    @And("Upload Second File")
+    public void uploadSecondFile() throws Exception {
+        createArtistPage.uploadSecondImage();
+    }
+
+    @Then("Select Language")
+    public void selectLanguage() throws Exception {
+        createArtistPage.clickDropDownAndSelectValue(CreateArtistPage.dropDownToSelect.LANGUAGES, "Hindi");
+    }
+
+    @And("Select Role")
+    public void selectRole() throws Exception {
+        createArtistPage.clickDropDownAndSelectValue(CreateArtistPage.dropDownToSelect.ROLE, "Singer");
+    }
+
+    @And("Enter Artist Bio")
+    public void enterArtistBio() throws Exception {
+
+        createArtistPage.typeArtistBio();
+    }
+
+    @And("Select IPRS radio button")
+    public void selectIPRSRadioButton() {
+        createArtistPage.clickYesIprsRadioButton();
+    }
+
+    @Then("click on continue button")
+    public void clickOnContinueButton() {
+        createArtistPage.clickContinueButton();
+    }
+
+    @Then("Assert User profile creation pop up")
+    public void assertUserProfileCreationPopUp() {
+    }
+
+
+
 }
