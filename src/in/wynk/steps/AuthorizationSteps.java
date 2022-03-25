@@ -136,14 +136,17 @@ public class AuthorizationSteps {
             authpage.enterEmailOnLoginPage("randon@random.com");
 
         }
-        else if (typeOfUser.equalsIgnoreCase("RUX") || typeOfUser.equalsIgnoreCase("Artist"))
+        else if (typeOfUser.equalsIgnoreCase("RUX") )
         {
-
-            authpage.enterEmailOnLoginPage("chassi.koul@gmail.com");
+            authpage.enterEmailOnLoginPage(emailId);
         }
         else if(typeOfUser.equalsIgnoreCase("Podcast"))
         {
             authpage.enterEmailOnLoginPage("podcast10@yopmail.com");
+        }
+        else if (typeOfUser.equalsIgnoreCase("Artist"))
+        {
+            authpage.enterEmailOnLoginPage();
         }
 
         Assert.assertTrue("Email not entered", authpage.ifEmailTextBoxIsEmpty());

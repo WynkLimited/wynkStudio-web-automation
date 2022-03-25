@@ -13,9 +13,9 @@ public class AuthorizationPage extends DriverActionUtils{
     in.wynk.framework.Assert anAssert;
     AuthPageElements elements;
     //String password = "Abcd@12345";
-    String password = "abcdef";
+    String password = "Abcd@12345";
     Utils utility;
-    String email = "auto@team807464.testinator.com";
+    String emailArtist = "karishmakoul2@gmail.com";
 
 
     public AuthorizationPage(CommonPage commonPage, Reporting Reporter, in.wynk.framework.Assert Assert,
@@ -58,7 +58,7 @@ public class AuthorizationPage extends DriverActionUtils{
     public void enterEmailOnLoginPage() throws Exception {
 
         click(elements.getEmailAddressTextBox(), "EmailTextBox" );
-        type( elements.getEmailAddressTextBox(), "EmailTextBox", email, 5);
+        type( elements.getEmailAddressTextBox(), "EmailTextBox", emailArtist, 5);
     }
     public void enterEmailOnRegisterPage(String randomEmail) throws Exception
     {
@@ -132,7 +132,7 @@ public class AuthorizationPage extends DriverActionUtils{
     public void enterEmailOnForgotPasswordPage() throws Exception
     {
         click(elements.getEmaiIdTextBoxForgotPasswordPage(), "Email Text Box on Forgot Password Page" );
-        type( elements.getEmaiIdTextBoxForgotPasswordPage(), "Email Text Box on Forgot Password Page", email, 5);
+        type( elements.getEmaiIdTextBoxForgotPasswordPage(), "Email Text Box on Forgot Password Page", emailArtist, 5);
     }
 
 

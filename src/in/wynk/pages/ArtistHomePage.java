@@ -42,7 +42,7 @@ public class ArtistHomePage extends DriverActionUtils {
         return isElementDisplayed(artistHomeElements.getHomeButtonArtistPage(), "Home Button on ArtistHome ",true);
     }
 
-    public void clickHomeButtonArtistHomePagePresent()
+    public void clickHomeButtonArtistHomePage()
     {
          click(artistHomeElements.getHomeButtonArtistPage(), "Home Button on ArtistHome ",true);
     }
@@ -52,7 +52,7 @@ public class ArtistHomePage extends DriverActionUtils {
         return isElementDisplayed(artistHomeElements.getStudioButtonArtistPage(), "Home Button on ArtistHome ",true);
     }
 
-    public void clickStudioButtonArtistHomePagePresent()
+    public void clickStudioButtonArtistHomePage()
     {
         click(artistHomeElements.getStudioButtonArtistPage(), "Home Button on ArtistHome ",true);
     }
@@ -62,11 +62,38 @@ public class ArtistHomePage extends DriverActionUtils {
         return isElementDisplayed(artistHomeElements.getDashboardButtonArtistPage(), "Home Button on ArtistHome ",true);
     }
 
-    public void clickDashboardButtonArtistHomePagePresent()
+    public void clickDashboardButtonArtistHomePage()
     {
         click(artistHomeElements.getDashboardButtonArtistPage(), "Home Button on ArtistHome ",true);
     }
 
+    public void clickGoToStudioHomeButtonOnWelcomeBanner()
+    {
+        click(artistHomeElements.getGoTOStudioHomeButton(), "Go To Studio Home Button On Welcome Banner",true);
+    }
+
+    public boolean isGoToStudioHomeButtonOnWelcomePresent()
+    {
+      return  isElementDisplayed(artistHomeElements.getGoTOStudioHomeButton(), "Go To Studio Home Button On Welcome Banner",true);
+    }
+
+    public String getUrlProfilePicOnWelcomeBanner()
+    {
+      return  getDriver().findElement(artistHomeElements.getProfilePhotoOnWelcomeAboardBanner()).getAttribute("src");
+    }
+
+
+    public String getNameOfArtistDashBoard()
+    {
+        System.out.println(getDriver().findElement(artistHomeElements.getNameOfArtistDashboard()).getText());
+        return getDriver().findElement(artistHomeElements.getNameOfArtistDashboard()).getText();
+    }
+
+    public String getRoleOfArtistDashBoard()
+    {
+        System.out.println(getDriver().findElement(artistHomeElements.getRoleOfArtistDashBoard()).getText());
+        return getDriver().findElement(artistHomeElements.getRoleOfArtistDashBoard()).getText();
+    }
 
 
 }

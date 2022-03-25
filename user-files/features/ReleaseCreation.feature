@@ -87,7 +87,7 @@ Feature: Release Creation
       |type_of_user|
       |RUX         |
 
-  @karishma
+  @karishma1
   Scenario Outline: Verify Upload Release Page
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>

@@ -1,7 +1,11 @@
 @artistCreation
 Feature: Artist Creation
 
-  @karishma1
+  @smoke
+  @regression
+  @sanity
+    @artistCreation
+    @karishma
     Scenario: Verify Create Or claim artist profile page
     Given User open Wynk studio Register page
     Then Enter EmailId on Register Page
@@ -20,7 +24,7 @@ Feature: Artist Creation
     And  Assert Claim Artist, View Profile on wynk and create new profile button
 
 
-  @karishma1
+  @Regression
     Scenario Outline: Verify click on back button in 'Create Or claim artist profile' page
         Given User open Wynk studio Login page
         Then  Enter Email <type_of_user>
@@ -34,7 +38,7 @@ Feature: Artist Creation
       |type_of_user|
       |RUX         |
 
-    @karishma1
+    @sanity
     Scenario Outline: Verify if Artist wants to proceed without filling mandatory fields on Add Artist Details Page
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -51,7 +55,7 @@ Feature: Artist Creation
         |type_of_user|
         |RUX         |
 
-    @karishma1
+    @smoke
     Scenario Outline: Verify photo upload functionality by Artist
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -69,7 +73,7 @@ Feature: Artist Creation
         |RUX         |
 
 
-    @karishma1
+    @regression @sanity
     Scenario Outline: Verify if Artist wants to upload more photos
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -88,28 +92,77 @@ Feature: Artist Creation
         |type_of_user|
         |RUX         |
 
+  @regression
+  Scenario Outline: Verify if Artist wants to update existing profile pic
+    Given User open Wynk studio Login page
+    Then  Enter Email <type_of_user>
+    And   Enter Password
+    Then  Click on Login
+    Given Enter name on Create or claim an artist profile page
+    Then  Click on Create New Profile Button
+    And   Click on Upload Photo
+    And   Click on + sign in Upload Photo Pop up
+    And   Upload First File
+    And   Click on cross sign on update photo tab
+    And   Click on + sign in Upload Photo Pop up
+    And   Upload Second File
+    And   Click on Done Button in Upload Photo Pop up
+    Then  Assert same image is uploaded on Add Artist Details Page
+    Examples:
+      |type_of_user|
+      |RUX         |
 
-      @karishma1
-      Scenario Outline: Verify that user's state is persisted when user clicks on back arrow
-      Given User open Wynk studio Login page
-      Then  Enter Email <type_of_user>
-      And   Enter Password
-      Then  Click on Login
-      Given Enter name on Create or claim an artist profile page
-      Then  Click on Create New Profile Button
-      #  And   Click on Upload Photo
-      #  And   Click on + sign in Upload Photo Pop up
-       # And   Upload First File
-       # And   Click on Done Button in Upload Photo Pop up
-        Then Select Language
-        And Select Role
-        And Enter Artist Bio
-        And Select IPRS radio button
-        Then click on continue button
-        Then Assert User profile creation pop up
-        Examples:
-          |type_of_user|
-          |RUX         |
+  @regression
+  Scenario Outline: Verify if Artist updates photo with wrong extension
+    Given User open Wynk studio Login page
+    Then  Enter Email <type_of_user>
+    And   Enter Password
+    Then  Click on Login
+    Given Enter name on Create or claim an artist profile page
+    Then  Click on Create New Profile Button
+    And   Click on Upload Photo
+    And   Click on + sign in Upload Photo Pop up
+    And   Upload First File with wrong extension
+    Then   Assert that error message for wrong image extension
+    Examples:
+      |type_of_user|
+      |RUX         |
+
+
+    @sanity
+    Scenario Outline: Verify that name entered on create or claim artist page is copied on Artist name text box on Add Artist details page
+    Given User open Wynk studio Login page
+    Then  Enter Email <type_of_user>
+    And   Enter Password
+    Then  Click on Login
+    Given Enter name on Create or claim an artist profile page
+      Then Verify the Artist name is same which user entered on Create or claim an artist profile page
+      Examples:
+        |type_of_user|
+        |RUX         |
+
+  @smoke
+  Scenario Outline: Verify that user's profile is created when user clicks on continue after filling out all the mandatory fields
+    Given User open Wynk studio Login page
+    Then  Enter Email <type_of_user>
+    And   Enter Password
+    Then  Click on Login
+    Given Enter name on Create or claim an artist profile page
+    Then  Click on Create New Profile Button
+    And   Click on Upload Photo
+    And   Click on + sign in Upload Photo Pop up
+    And   Upload First File
+    And   Click on Done Button in Upload Photo Pop up
+    Then Select Language
+    And Select Role
+    And Enter Artist Bio
+    And Select IPRS radio button
+    Then click on continue button
+    Then Assert User profile creation pop up
+    Examples:
+      |type_of_user|
+      |RUX         |
+
 
 
 

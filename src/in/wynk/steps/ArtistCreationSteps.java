@@ -8,12 +8,16 @@ import in.wynk.framework.MailinatorAPI;
 import in.wynk.framework.SoftAssert;
 import in.wynk.pages.*;
 import in.wynk.common.Utils;
+import org.aspectj.weaver.patterns.HasMemberTypePattern;
+
+import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 
 
 public class ArtistCreationSteps {
 
+    static HashMap<String, String> mapToValidate;
     CreateArtistPage createArtistPage;
     AuthorizationPage authpage ;
     CommonStudioPage commonStudioPage;
@@ -44,6 +48,7 @@ public class ArtistCreationSteps {
         this.professionPage =professionPage;
         this.createArtistPage= createArtistPage;
         this.claimArtistPage =claimArtistPage;
+        this.mapToValidate = new HashMap<String, String>();
     }
 
     @Given("click on i am a Music Artist")
@@ -57,7 +62,9 @@ public class ArtistCreationSteps {
     @And("Enter name on Create or claim an artist profile page")
     public void enterNameOnCreateOrClaimAnArtistProfilePage() throws Exception {
 
+        mapToValidate.put("ArtistName","Rahul");
         createArtistPage.typeArtistNameInTextBox("Rahul");
+
     }
 
 
@@ -194,6 +201,7 @@ public class ArtistCreationSteps {
     @And("Select Role")
     public void selectRole() throws Exception {
         createArtistPage.clickDropDownAndSelectValue(CreateArtistPage.dropDownToSelect.ROLE, "Singer");
+        mapToValidate.put("role","Instrumentalist");
     }
 
     @And("Enter Artist Bio")
@@ -203,19 +211,50 @@ public class ArtistCreationSteps {
     }
 
     @And("Select IPRS radio button")
-    public void selectIPRSRadioButton() {
+    public void selectIPRSRadioButton() throws InterruptedException {
         createArtistPage.clickYesIprsRadioButton();
     }
 
     @Then("click on continue button")
     public void clickOnContinueButton() {
+
         createArtistPage.clickContinueButton();
     }
 
     @Then("Assert User profile creation pop up")
     public void assertUserProfileCreationPopUp() {
+        Assert.assertNotNull(studioPage.getUrlProfilePicOnWelcomeBanner());
+        Assert.assertTrue(studioPage.isGoToStudioHomeButtonOnWelcomePresent());
+        studioPage.clickGoToStudioHomeButtonOnWelcomeBanner();
+        studioPage.clickDashboardButtonArtistHomePage();
+        System.out.println(mapToValidate.get("role")+ "***************" + mapToValidate.get("ArtistName"));
+        Assert.assertTrue(mapToValidate.get("role").equalsIgnoreCase(studioPage.getRoleOfArtistDashBoard()));
+        Assert.assertTrue(mapToValidate.get("ArtistName").equalsIgnoreCase(studioPage.getNameOfArtistDashBoard()));
+
     }
 
 
 
+
+    @And("Click on cross sign on update photo tab")
+    public void clickOnCrossSignOnUpdatePhotoTab() {
+
+        createArtistPage.clickCrossButtonOnProfilePic();
+    }
+
+    @And("Upload First File with wrong extension")
+    public void uploadFirstFileWithWrongExtension() throws Exception {
+        createArtistPage.uploadInvalidImage();
+    }
+
+    @Then("Assert that error message for wrong image extension")
+    public void assertThatErrorMessageForWrongImageExtension() {
+        Assert.assertTrue("Photo is uploaded",createArtistPage.isAddPhotoPlusSignPopUp());
+    }
+
+    @Then("Verify the Artist name is same which user entered on Create or claim an artist profile page")
+    public void verifyTheArtistNameIsSameWhichUserEnteredOnCreateOrClaimAnArtistProfilePage()
+    {
+       Assert.assertTrue(createArtistPage.readArtistNameFromArtistNameTextBox().equalsIgnoreCase("rahul"));
+    }
 }

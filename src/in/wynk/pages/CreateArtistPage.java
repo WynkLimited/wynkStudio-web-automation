@@ -7,6 +7,7 @@ import javax.script.ScriptEngine;
 import in.wynk.framework.Reporting;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -22,6 +23,7 @@ public class CreateArtistPage  extends DriverActionUtils {
 
 
 
+
     public CreateArtistPage( CreateArtistElements createArtistElements,
                              Reporting Reporter, in.wynk.framework.Assert Assert,
                              in.wynk.framework.SoftAssert SoftAssert)
@@ -33,6 +35,10 @@ public class CreateArtistPage  extends DriverActionUtils {
     public int getSizeOfListOfArtistInDropDown()
     {
         return getWebElementsList(createArtistElements.getListOfArtist()).size();
+    }
+    public void clickCrossButtonOnProfilePic()
+    {
+        click(createArtistElements.getCrossButtonOnUpdatePhotoTab(), "Cross Button update photo tab",true);
     }
 
     public void clickFirstNonClaimedArtistFound()
@@ -145,6 +151,10 @@ public class CreateArtistPage  extends DriverActionUtils {
         uploadImage("auto3.jpg");
     }
 
+    public void uploadInvalidImage() throws Exception {
+        uploadImage("invalid.gif");
+    }
+
     public void uploadImage(String imageName) throws Exception
     {
        String filePath ="/Users/b0218201/Documents/Automation Repo/wynkStudio-web-automation/user-files/resources/";
@@ -179,12 +189,24 @@ public class CreateArtistPage  extends DriverActionUtils {
 
     public void clickPhotoUploadAddArtistDetailsPage()
     {
-        click(createArtistElements.getUploadPhotoButton(), " Photo Upload Button on Add Artist Details Page ",true);
+        try {
+            if(getDriver().findElement(createArtistElements.getUpdatePhotoButton()).isDisplayed()) {
+               //do nothing
+            }
+        }catch (Exception ex)
+        {
+            click(createArtistElements.getUploadPhotoButton(), " Photo Upload Button on Add Artist Details Page ", true);
+        }
     }
 
     public void clickAddPhotoPlusSignPopUp()
     {
         getElementWhenPresent(createArtistElements.getAddPhotoPlusSign(),25).click();
+    }
+
+    public boolean isAddPhotoPlusSignPopUp()
+    {
+     return   isElementDisplayed(createArtistElements.getAddPhotoPlusSign(),"+ sign", true);
     }
 
     public void clickDoneButtonOnPopUp()
@@ -235,14 +257,17 @@ public class CreateArtistPage  extends DriverActionUtils {
         type( createArtistElements.getTypeYourNameTextBox(), "Artist Name Text Box on Create or claim Artist Page", name, 5);
     }
 
-    private void selectValueFromDropDown(By locator, String value) throws Exception {
+    public String readArtistNameFromArtistNameTextBox()
+    {
+        return getElementWhenVisible(createArtistElements.getTypeYourNameTextBox(),5).getAttribute("value");
+    }
 
-        click(createArtistElements.getLanguageDropdown(), "Language drop down" , true);
-        click(createArtistElements.getLanguageDropdown2(), "Language drop down" , true);
-       // type( createArtistElements.getLanguageDropdown(), "Language drop down",
-         //       "Hindi", 5);
-      //  click(createArtistElements.getLanguageDropdown(), "Language drop down" , true);
-        click(createArtistElements.getHindiLang(), "Hindi Language drop down" , true);
+    private void selectValueFromDropDown(By locator, String value) throws Exception {
+        getWebElementsList(createArtistElements.getLanguageDropdown()).get(2).click();
+         sleep(3);
+         click(createArtistElements.getHindiLang(), "Hindi Language drop down" , true);
+        Thread.sleep(20000);
+
     }
 
     public static enum dropDownToSelect {NATIONALITY,LANGUAGES, ERA, GENRE, ROLE}
@@ -254,7 +279,10 @@ public class CreateArtistPage  extends DriverActionUtils {
                 break;
 
             case LANGUAGES:
-                selectValueFromDropDown(createArtistElements.getLanguageDropdown(), value);
+                getWebElementsList(createArtistElements.getLanguageDropdown()).get(2).click();
+                sleep(2);
+                click(createArtistElements.getHindiLang(), "Hindi Language drop down" , true);
+                Thread.sleep(4000);
                 break;
 
             case GENRE:
@@ -266,7 +294,10 @@ public class CreateArtistPage  extends DriverActionUtils {
                 break;
 
             case ROLE:
-                selectValueFromDropDown(createArtistElements.getRolesDropdown(), value);
+                getWebElementsList(createArtistElements.getLanguageDropdown()).get(3).click();
+                sleep(2);
+                click(createArtistElements.getInstrumentalist(), "Instrumentalist" , true);
+                Thread.sleep(4000);
                 break;
 
         }
@@ -279,11 +310,13 @@ public class CreateArtistPage  extends DriverActionUtils {
 
     public void clickContinueButton()
     {
+        scrollingToElementofAPage(createArtistElements.getContinueButton());
         click(createArtistElements.getContinueButton(),"Continue Button on Add Artist Details Page");
     }
 
-    public void clickYesIprsRadioButton()
-    {
+    public void clickYesIprsRadioButton() throws InterruptedException {
+        Thread.sleep(3000);
+        scrollingToElementofAPage(createArtistElements.getIprsYes());
         click(createArtistElements.getIprsYes(),"Yes IPRS");
     }
     public void clickNoIprsRadioButton()
@@ -302,6 +335,7 @@ public class CreateArtistPage  extends DriverActionUtils {
                 "Then Assert User should be on profession page\n" +
                 "Then click on i am a Music Artist\n";
         type( createArtistElements.getBioTextBox(), "Artist Name Text Box on Create or claim Artist Page", bio, 5);
+        Thread.sleep(3000);
     }
 
 }
