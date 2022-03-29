@@ -20,8 +20,6 @@ public class ArtistHomePage extends DriverActionUtils {
         this.commonElements = commonElements;
     }
 
-
-
     public boolean isNewReleaseButtonPresent()
     {
         return isElementDisplayed(artistHomeElements.getNewReleaseButtonArtistPage(), "New release button",true);
@@ -85,15 +83,22 @@ public class ArtistHomePage extends DriverActionUtils {
 
     public String getNameOfArtistDashBoard()
     {
-        System.out.println(getDriver().findElement(artistHomeElements.getNameOfArtistDashboard()).getText());
         return getDriver().findElement(artistHomeElements.getNameOfArtistDashboard()).getText();
     }
 
     public String getRoleOfArtistDashBoard()
     {
-        System.out.println(getDriver().findElement(artistHomeElements.getRoleOfArtistDashBoard()).getText());
         return getDriver().findElement(artistHomeElements.getRoleOfArtistDashBoard()).getText();
     }
 
+    public String getInReviewState()
+    {
+      return getElementWhenPresent(commonElements.getInReviewReleasesummary(),5).getText();
+    }
+
+    public String getReleaseNameOnReleaseSummaryPage()
+    {
+        return getElementWhenPresent(commonElements.getNameOfReleaseOnReleaseSummary(),5).getText();
+    }
 
 }

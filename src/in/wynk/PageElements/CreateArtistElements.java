@@ -16,12 +16,9 @@ public class CreateArtistElements {
     private By fullNameTextBox = By.id("name");
     private By NationalityDropDown = By.id("rc_select_8");
     private By LanguageDropdown = By.xpath("//input[@class='ant-select-selection-search-input']");
-    //private By LanguageDropdown = By.xpath("//div[@id='Languages']/div/div/div");
-  // private By LanguageDropdown = By.xpath("//div[@id='Languages']//div[@class='ant-select-selection-overflow']");
-   private By LanguageDropdown2  = By.xpath("//*[@id='Languages']/div/div[2]/div/div");
-   private By hindiLang = By.xpath("//div[contains(text(),'Hindi')][@class='ant-select-item-option-content']");
-   private By instrumentalist = By.xpath("//div[contains(text(),'Instrumentalist')][@class='ant-select-item-option-content']");
-  //  private By hindiLang = By.cssSelector(".ant-select-item-option-active > .ant-select-item-option-content");
+    private By LanguageDropdown2  = By.xpath("//*[@id='Languages']/div/div[2]/div/div");
+    private By hindiLang = By.xpath("//div[contains(text(),'Hindi')][@class='ant-select-item-option-content']");
+    private By instrumentalist = By.xpath("//div[contains(text(),'Instrumentalist')][@class='ant-select-item-option-content']");
     private By RolesDropdown = By.id("rc_select_10");
     private By EraDropdown = By.id("rc_select_11");
     private By GenreDropdown = By.id("rc_select_12");
@@ -33,7 +30,6 @@ public class CreateArtistElements {
     private By continueButton = By.xpath("//button/span[contains(text(),'Continue')]");
     private By addPhotoPlusSign= By.xpath("//span[@aria-label='plus']");
     private By uploadImage1 = By.cssSelector(".style__AddPhoto-sc-9ylmvx-4");
-    //private By uploadImage2 =By.cssSelector(".Styled__FlexContainer-sc-243yjz-7 > input");
     private By uploadImage2 =By.xpath("//input[@type='file']");
     private By imageUploadedOnPopUp =By.xpath("//div[@class='style__ImageContainer-sc-9ylmvx-2 cjjnno']/img[1]");
     private By imageUploadedOnAddArtistPage = By.xpath("//div[@class='Styled__FlexContainer-sc-243yjz-7 style__ProfileFlexContainer-sc-1fov93c-16 kfgLme oprMB']/img[1]");

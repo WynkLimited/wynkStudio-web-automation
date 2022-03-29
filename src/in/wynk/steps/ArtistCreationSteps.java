@@ -227,7 +227,6 @@ public class ArtistCreationSteps {
         Assert.assertTrue(studioPage.isGoToStudioHomeButtonOnWelcomePresent());
         studioPage.clickGoToStudioHomeButtonOnWelcomeBanner();
         studioPage.clickDashboardButtonArtistHomePage();
-        System.out.println(mapToValidate.get("role")+ "***************" + mapToValidate.get("ArtistName"));
         Assert.assertTrue(mapToValidate.get("role").equalsIgnoreCase(studioPage.getRoleOfArtistDashBoard()));
         Assert.assertTrue(mapToValidate.get("ArtistName").equalsIgnoreCase(studioPage.getNameOfArtistDashBoard()));
 

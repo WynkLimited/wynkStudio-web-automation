@@ -1,5 +1,6 @@
 package in.wynk.steps;
 
+
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
@@ -8,6 +9,7 @@ import in.wynk.pages.*;
 import in.wynk.common.Utils;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import static org.apache.kafka.common.utils.Utils.sleep;
 
@@ -22,8 +24,9 @@ public class ReleaseCreationSteps {
     PodcastHomePage podcastHomePage;
     ProfessionPage professionPage;
     ClaimArtistPage claimArtistPage;
-    String  href1, href2;
+    String  nameOfPrimaryArtist;
     ReleaseCreationPage releaseCreationPage;
+
 
 
     public ReleaseCreationSteps(ClaimArtistPage claimArtistPage, CreateArtistPage createArtistPage,AuthorizationPage authpage, CommonStudioPage commonStudioPage,
@@ -82,7 +85,7 @@ public class ReleaseCreationSteps {
 
     @Then("click on No button on pop up")
     public void clickOnNoButtonOnPopUp() {
-        releaseCreationPage.clickNoButtonOnPopUp();
+        releaseCreationPage.clickNoRadioButtonOnPopUp();
     }
 
     @And("Assert error message should be present on pop up")
@@ -130,14 +133,16 @@ public class ReleaseCreationSteps {
     }
 
     @Then("click on upload audio button")
-    public void clickOnUploadAudioButton() {
-        releaseCreationPage.clickAddAudioButtonPopUp();
+    public void clickOnUploadAudioButton() throws InterruptedException {
+        Thread.sleep(10000);
+        releaseCreationPage.clickAddAudioButton();
     }
 
     @And("upload audio file")
     public void uploadAudioFile() throws IOException, InterruptedException {
         releaseCreationPage.uploadAudio();
-        Thread.sleep(20000);
+
+
     }
 
     @Then("Enter Release title")
@@ -166,7 +171,7 @@ public class ReleaseCreationSteps {
 
         try {
             releaseCreationPage.uploadArtwork();
-            Thread.sleep(20000);
+
         }catch (IOException ex) {
            ex.printStackTrace();
         } catch (InterruptedException e) {
@@ -179,5 +184,206 @@ public class ReleaseCreationSteps {
     @Then("Assert Add your release Details is present")
     public void assertAddYourReleaseDetailsIsPresent() {
        Assert.assertTrue("AddYourReleaseDetailsHeading", releaseCreationPage.isAddYourReleaseDetailsHeading());
+    }
+
+
+    @Then("click on play button")
+    public void clickOnPlayButton() {
+        releaseCreationPage.clickPlayButton();
+
+    }
+
+    @And("Assert if the song is playing")
+    public void assertIfTheSongIsPlaying() throws InterruptedException {
+        Assert.assertTrue("Song not played", releaseCreationPage.checkIfSongIsPlaying());
+    }
+
+    @Then("click on cross button")
+    public void clickOnCrossButton() {
+        releaseCreationPage.clickCrossButton();
+    }
+
+    @And("verify that audio file is removed")
+    public void verifyThatAudioFileIsRemoved() {
+        Assert.assertFalse("Autio file not deleted after clicking cross button", releaseCreationPage.isProgressBarPresent());
+    }
+
+    @And("upload .wav audio file")
+    public void uploadWavAudioFile() throws IOException, InterruptedException {
+
+        releaseCreationPage.uploadWAVAudio();
+        Thread.sleep(20000);
+
+    }
+
+    @And("Upload small resolution Artwork File")
+    public void uploadSmallResolutionArtworkFile() throws IOException, InterruptedException {
+        releaseCreationPage.uploadSmallerResolutionArtwwork();
+        Thread.sleep(20000);
+    }
+
+    @And("Assert the error msg for smaller resolution artwork")
+    public void assertTheErrorMsgForSmallerResolutionArtwork() {
+
+     Assert.assertTrue("Smaller resolution err msg not present",
+             releaseCreationPage.isSmallerResolutionErrorMsgPresent());
+    }
+
+    @Then("Click on Yes I have UPC")
+    public void clickOnYesIHaveUPC() {
+
+        releaseCreationPage.clickYesUPCButton();
+    }
+
+    @And("Click on Yes I have ISRC")
+    public void clickOnYesIHaveISRC() {
+        releaseCreationPage.clickYesISRCButton();
+    }
+
+    @Then("Select Primary artist Role")
+    public void selectPrimaryArtistRole() throws InterruptedException {
+        releaseCreationPage.selectPrimaryArtistRole();
+    }
+    @And("assert that the name of Primary artist is correct")
+    public void assertThatTheNameOfPrimaryArtistIsCorrect() {
+
+        Assert.assertTrue("Primary name is not correct", nameOfPrimaryArtist.equalsIgnoreCase(releaseCreationPage.readPrimaryArtistName()));
+    }
+
+    @Then("Select Supporting Artist role and enter name")
+    public void selectSupportingArtistRoleAndEnterName() throws Exception {
+        releaseCreationPage.selectSupportingArtistRoleAndEnterName();
+    }
+
+    @And("click on cross button for secondary artist")
+    public void clickOnCrossButtonForSecondaryArtist() throws Exception {
+        releaseCreationPage.clickCrossButtonSecondaryArtist();
+    }
+
+    @And("Assert that secondary artist is removed")
+    public void assertThatSecondaryArtistIsRemoved() {
+        Assert.assertTrue("Secondary artist is not removed", releaseCreationPage.isAddSupportingArtistButtonPresent());
+    }
+
+    @Then("Select Primary Language")
+    public void selectPrimaryLanguage() throws InterruptedException {
+        releaseCreationPage.selectPrimaryLanguage();
+    }
+
+    @And("select Genre")
+    public void selectGenre() throws Exception {
+        releaseCreationPage.selectPrimaryGenre();
+    }
+
+    @Then("upload lyrics file")
+    public void uploadLyricsFile() throws IOException, InterruptedException {
+        releaseCreationPage.uploadLyricFile();
+    }
+
+    @And("Remove lyrics file")
+    public void removeLyricsFile() {
+
+        releaseCreationPage.clickRemoveLRCfile();
+    }
+
+    @And("assert file is removed")
+    public void assertFileIsRemoved() {
+      Assert.assertFalse("LRC file is not removed",releaseCreationPage.isLrcFileSuccessfullyUploaded());
+    }
+
+    @Then("Enter lyrics manually")
+    public void enterLyricsManually() throws Exception
+    {
+        releaseCreationPage.clickAddLyricRadioButton();
+        releaseCreationPage.typeLyricsManually();
+    }
+
+    @And("Select No in explicit content")
+    public void selectNoInExplicitContent() {
+        releaseCreationPage.clickNoExplicitContentRadioButton();
+
+    }
+
+    @And("Select No in previously release")
+    public void selectNoInPreviouslyRelease() {
+        releaseCreationPage.clickNoPreviouslyReleaseRadioButton();
+    }
+
+
+    @And("Assert that duplicate clipnames not allowed msg is showing")
+    public void assertThatDuplicateClipnamesNotAllowedMsgIsShowing() {
+
+       Assert.assertTrue( "Duplicate Error msg is not showing",releaseCreationPage.isHTDuplicateErrorMsgExist());
+    }
+
+    @Then("Select as soon as possile")
+    public void selectAsSoonAsPossile() {
+        releaseCreationPage.clickAsSoonAsPosibleRadioButton();
+    }
+
+    @Then("Match the data is correct")
+    public void matchTheDataIsCorrect() {
+        releaseCreationPage.matchTheDetails();
+    }
+
+    @Then("Click on confirm and Submit")
+    public void clickOnConfirmAndSubmit() {
+        releaseCreationPage.clickConfirmAndSubmitButton();
+    }
+
+
+    @Then("Click on dashboard button")
+    public void clickOnDashboardButton() {
+        studioPage.clickDashboardButtonArtistHomePage();
+        nameOfPrimaryArtist = studioPage.getNameOfArtistDashBoard();
+
+    }
+
+    @And("Click on studio home button")
+    public void clickOnStudioHomeButton() {
+        studioPage.clickStudioButtonArtistHomePage();
+    }
+
+
+    @Then("click on upload lyrics along")
+    public void clickOnUploadLyricsAlong() throws IOException, InterruptedException {
+
+        releaseCreationPage.clickUploadLyricsAlongSongRadioButton();
+        Thread.sleep(1000);
+    }
+
+    @Then("Assert if the lyric file is successfully uploaded")
+    public void assertIfTheLyricFileIsSuccessfullyUploaded() {
+        Assert.assertTrue("LRC file not uploaded successfully",
+              releaseCreationPage.isLrcFileSuccessfullyUploaded());
+    }
+
+    @Then("Enter first clip name (.*?)")
+    public void enterFirstClipName(String clipName) throws Exception {
+        releaseCreationPage.clickAndEnterFirstHT(clipName);
+    }
+
+    @And("Enter second clip name (.*?)")
+    public void enterSecondClipName(String clipName) throws Exception {
+        releaseCreationPage.clickAndEnterSecondHT(clipName);
+    }
+
+    @Then("Click on upload lyrics in lrc format button")
+    public void clickOnUploadLyricsInLrcFormatButton() throws InterruptedException {
+        releaseCreationPage.clickUploadFileLRCFormatButton();
+
+    }
+
+    @And("Click Add more HT clip button")
+    public void clickAddMoreHTClipButton() {
+
+        releaseCreationPage.clickAddMoreHTCLips();
+    }
+
+    @And("Assert that the Release is in review state")
+    public void assertThatTheReleaseIsInReviewState() throws InterruptedException {
+        Thread.sleep(2000);
+        Assert.assertTrue("Release name in correct",studioPage.getReleaseNameOnReleaseSummaryPage().equalsIgnoreCase("Karishma Automation"));
+        Assert.assertTrue(" Not in in-review state",studioPage.getInReviewState().contains("Review"));
     }
 }
