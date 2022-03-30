@@ -30,16 +30,16 @@ Feature: Release Creation
         |type_of_user|
         |Artist         |
 
-  @karishma1
-  Scenario Outline: Verify click on No Radio Button on  pop up
-    Given User open Wynk studio Login page
-    Then  Enter Email <type_of_user>
-    And   Enter Password
-    Then  Click on Login
-    Given User clicks on New Release button
-    Then click on No button on pop up
-    And Assert error message should be present on pop up
-    Examples:
+    @karishma1
+    Scenario Outline: Verify click on No Radio Button on  pop up
+      Given User open Wynk studio Login page
+      Then  Enter Email <type_of_user>
+      And   Enter Password
+      Then  Click on Login
+      Given User clicks on New Release button
+      Then click on No button on pop up
+      And Assert error message should be present on pop up
+      Examples:
       |type_of_user|
       |Artist         |
 
@@ -215,7 +215,7 @@ Feature: Release Creation
       Then  click on upload artwork button
       And   Upload Artwork File
       And   Click on Continue button Add Release
-     # Then  Select Primary artist Role
+      Then  Select Primary artist Role
       And   assert that the name of Primary artist is correct
       Then  Select Supporting Artist role and enter name
       And   click on cross button for secondary artist
