@@ -550,7 +550,8 @@ public class CommonPage extends DriverActionUtils {
     public static enum navigationOption {HOME,LOGIN, REGISTER}
 
     public void navigateToPage(navigationOption navigationOption) {
-        switch (navigationOption) {
+
+    switch (navigationOption) {
             case HOME:
                 String x = sTestDetails.get().get("APP_URL");
                 launchUrl(sTestDetails.get().get("APP_URL") , true);
@@ -560,8 +561,7 @@ public class CommonPage extends DriverActionUtils {
                 launchUrl(sTestDetails.get().get("APP_URL")+"/register", true);
                 break;
 
-
-                case LOGIN:
+            case LOGIN:
                 launchUrl(sTestDetails.get().get("APP_URL")+"/login" , true);
                 break;
 

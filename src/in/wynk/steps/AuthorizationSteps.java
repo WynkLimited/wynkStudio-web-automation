@@ -41,9 +41,6 @@ public class AuthorizationSteps {
         this.professionPage =professionPage;
     }
 
-
-
-
     @Then("Click on Create Account")
     public void clickOnCreateAccount() throws Exception {
      authpage.clickCreateAccountRegisterPage();
@@ -76,7 +73,6 @@ public class AuthorizationSteps {
 
     @Given("User open Wynk studio Login page")
     public void userOpenWynkStudioLoginPage() {
-
         commonPage.navigateToPage(CommonPage.navigationOption.LOGIN);
        Assert.assertTrue(authpage.isEmailTextBoxPresent());
 

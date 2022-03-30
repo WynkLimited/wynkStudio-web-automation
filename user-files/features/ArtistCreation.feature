@@ -5,7 +5,7 @@ Feature: Artist Creation
   @regression
   @sanity
     @artistCreation
-    @karishma1
+
     Scenario: Verify Create Or claim artist profile page
     Given User open Wynk studio Register page
     Then Enter EmailId on Register Page

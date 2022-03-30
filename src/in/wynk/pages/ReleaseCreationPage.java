@@ -356,8 +356,7 @@ ReleaseCreationElements releaseCreationElements;
         Thread.sleep(1000);
         getElementWhenPresent(releaseCreationElements.getSupportingActorRoleDropDown()).click();
         Thread.sleep(1000);
-        //change 0 to 1
-        getWebElementsList(releaseCreationElements.getSecondaryArtistSingerRoleList()).get(0).click();
+        getWebElementsList(releaseCreationElements.getSecondaryArtistSingerRoleList()).get(1).click();
         Thread.sleep(2000);
         type(releaseCreationElements.getSecondaryArtistName(),"secondary artist name","Rahul",5);
 
@@ -396,14 +395,101 @@ ReleaseCreationElements releaseCreationElements;
         Thread.sleep(2000);
         type(releaseCreationElements.getGenreSearchTextField(),"Genre","B", 5 );
         Thread.sleep(2000);
-        getElementWhenPresent(releaseCreationElements.getBollywoodFemalVocal()).click();
+        getElementWhenPresent(releaseCreationElements.getBachataGenre()).click();
         Thread.sleep(2000);
         releaseValidator.put("PrimaryGenre","Bachata");
     }
 
+    public void selectMultipleGenre() throws Exception
+    {
+        getElementWhenPresent(releaseCreationElements.getGenreDropDown()).click();
+        Thread.sleep(2000);
+        type(releaseCreationElements.getGenreSearchTextField(),"Genre","B", 5 );
+        Thread.sleep(2000);
+        getElementWhenPresent(releaseCreationElements.getBachataGenre()).click();
+        Thread.sleep(2000);
+
+        getElementWhenPresent(releaseCreationElements.getGenreDropDown()).click();
+        Thread.sleep(3000);
+        getElementWhenPresent(releaseCreationElements.getGenreSearchTextField(),5).sendKeys("N");
+        Thread.sleep(2000);
+        getElementWhenPresent(releaseCreationElements.getNativeAmericanGenre()).click();
+        Thread.sleep(2000);
+    }
+
+    public void deleteAllGenre()
+    {
+        for(int i=0;i<countOfGenreSlected();i++)
+        {
+            getWebElementsList(releaseCreationElements.getGenreCloseButtonList()).get(0).click();
+        }
+    }
+
+    public boolean isHTHelpModalPresent()
+    {
+       return isElementDisplayed(releaseCreationElements.getHtHelpPopUp(),"HTHelpModal",true);
+    }
+
+    public void clickHereLinkOnAddHTPage()
+    {
+        click(releaseCreationElements.getHereLink(),"Here Link On Add HT Page", true, 5);
+    }
+
+    public boolean isHTHelpBannerIntact()
+    {
+        boolean f1 = isElementDisplayed(releaseCreationElements.getHtHelpPopUp(),"HTHelpModal",true);
+        boolean f2 = isElementDisplayed(releaseCreationElements.getHtBannerImage(),"HTHelpModal banner image",true);
+        boolean f3 =  isElementDisplayed(releaseCreationElements.getHtBannerText(),"HTHelpModal banner text",true);
+
+        if (f1 && f2 && f3)
+          return  true;
+       return false;
+    }
+
+    public void clickCrossIconOnHTHelpBanner()
+    {
+        click(releaseCreationElements.getCrossIcononBanner(),"CrossIconOnHTHelpBanner", true, 5);
+    }
+    public int countOfGenreSlected()
+    {
+        return getWebElementsList(releaseCreationElements.getGenreCloseButtonList()).size();
+    }
     public void clickUploadLyricsAlongSongRadioButton()
     {
      click(releaseCreationElements.getUploadSongLyricsRadioButton(),"upload song lyrics radio button", true, 5);
+    }
+
+    public void clickUploadLrcButtonOnBanner() throws InterruptedException
+    {
+        Thread.sleep(3000);
+        click(releaseCreationElements.getAddLRCFileViaBannerButton(),"Upload Lrc Button On Banner",
+                true, 5);
+    }
+
+    public void clickYesPreviouslyUploadedRadioButton()
+    {
+        click(releaseCreationElements.getPreviouslyReleasedYesRadioButton(),"Yes button Previous upload", 5);
+    }
+
+    public void clickEditButtonForReleaseUploadedButton()
+    {
+        click(releaseCreationElements.getReleaseUploadedEditButton(),"Edit Button For Release Uploaded Button", 5);
+    }
+
+    public boolean isWrongURLAlertPresentPreviouslyReleased()
+    {
+        try {
+            return isElementDisplayed(releaseCreationElements.getInvalidURLErrorPreviouslyRelease(),
+                    "WrongURLAlert PreviouslyRelease", true);
+        } catch (Exception e)
+        {
+            return false;
+        }
+    }
+
+    public void enterTextInReleaseLinkTextBox(String text)
+    {
+        getWebElementsList(releaseCreationElements.getTextBoxWherePreviouslyReleaseList()).get(0).sendKeys(text);
     }
 
     public void uploadLyricFile() throws IOException, InterruptedException {

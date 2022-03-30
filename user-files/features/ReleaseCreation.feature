@@ -1,7 +1,7 @@
 @ReleaseCreation
 Feature: Release Creation
 
-  @karishma1
+  @Regression
   Scenario Outline: Verify a pop up open when user clicks on '+ Add new release' button.
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -14,11 +14,36 @@ Feature: Release Creation
     Then Assert cross button on Pop UP
     Examples:
     |type_of_user|
-    |Artist         |
+    |Artist      |
 
+  @Regression
 
-    @karishma1
-    Scenario Outline: Verify click on cross Button on  pop up
+  Scenario Outline: Verify adding multiple Genre
+    Given User open Wynk studio Login page
+    Then  Enter Email <type_of_user>
+    And   Enter Password
+    Then  Click on Login
+    Then  Click on dashboard button
+    And   Click on studio home button
+    Given User clicks on New Release button
+    Then  click on Yes button on pop up
+    Then  Click on continue Button on Pop up
+    Then  click on upload audio button
+    And   upload audio file
+    Then  Enter Release title
+    Then  select ISRC
+    And   Select UPC
+    Then  click on upload artwork button
+    And   Upload Artwork File
+    And   Click on Continue button Add Release
+    Then  select multiple Genre
+    And   Assert that multiple Genre got selected
+    Examples:
+      |type_of_user|
+      |Artist         |
+
+    @Regression
+    Scenario Outline: Verify click on cross Button on pop up
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
       And   Enter Password
@@ -30,8 +55,8 @@ Feature: Release Creation
         |type_of_user|
         |Artist         |
 
-    @karishma1
-    Scenario Outline: Verify click on No Radio Button on  pop up
+    @Regression
+    Scenario Outline: Verify click on No Radio Button on pop up
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
       And   Enter Password
@@ -43,7 +68,7 @@ Feature: Release Creation
       |type_of_user|
       |Artist         |
 
-  @karishma1
+  @Sanity
   Scenario Outline: Verify click on Yes Radio Button on  pop up
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -57,7 +82,7 @@ Feature: Release Creation
       |type_of_user|
       |Artist         |
 
-  @karishma1
+  @Regression
   Scenario Outline: Verify click on Back Arrow Button on  pop up
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -72,7 +97,7 @@ Feature: Release Creation
       |type_of_user|
       |Artist         |
 
-  @karishma1
+  @Sanity
   Scenario Outline: Verify Error Alerts are coming if user clicks on continue without filling the details on Upload Release Pgae
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -87,7 +112,7 @@ Feature: Release Creation
       |type_of_user|
       |Artist         |
 
-  @karishma1
+  @Sanity
   Scenario Outline: Verify if audio file is getting played till 100% completion
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -104,7 +129,7 @@ Feature: Release Creation
       |type_of_user|
       |Artist         |
 
-  @karishma1
+  @Regression
   Scenario Outline: Verify clicking on cross button is removing the uploaded audio file
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -121,7 +146,7 @@ Feature: Release Creation
       |type_of_user|
       |Artist         |
 
-  @karishma1
+  @Sanity
   Scenario Outline: Verify Uploading a valid audio file with .WAV/.WMA file
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -138,7 +163,7 @@ Feature: Release Creation
       |type_of_user|
       |Artist      |
 
-  @karishma1
+  @Sanity
   Scenario Outline: Verify Uploading a less than 800 * 800 resolution artwork
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -155,7 +180,7 @@ Feature: Release Creation
       |Artist      |
 
 
-  @karishma1
+  @Regression
   Scenario Outline: Verify when user clicks on continue without entering UPC and ISRC Code
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -168,13 +193,12 @@ Feature: Release Creation
     And Click on Yes I have ISRC
     And Click on Continue button Add Release
     And Assert Error Msgs on Required Fields Upload Release Page
-
     Examples:
       |type_of_user|
       |Artist      |
 
 
-  @karishma1
+  @Regression
   Scenario Outline: Verify Upload Release Page
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -196,7 +220,35 @@ Feature: Release Creation
       |type_of_user|
       |Artist         |
 
-    @karishma
+    @Regression
+    Scenario Outline: Verify upload lyrics via upload lrc file on banner
+      Given User open Wynk studio Login page
+      Then  Enter Email <type_of_user>
+      And   Enter Password
+      Then  Click on Login
+      Then  Click on dashboard button
+      And   Click on studio home button
+      Given User clicks on New Release button
+      Then  click on Yes button on pop up
+      Then  Click on continue Button on Pop up
+      Then  click on upload audio button
+      And   upload audio file
+      Then  Enter Release title
+      Then  select ISRC
+      And   Select UPC
+      Then  click on upload artwork button
+      And   Upload Artwork File
+      And   Click on Continue button Add Release
+      Then  click on Here link
+      And   Click on upload lyric button on modal
+      Then  upload lyrics file
+      Then  Assert if the lyric file is successfully uploaded
+      Examples:
+        |type_of_user|
+        |Artist         |
+
+
+    @Smoke
     Scenario Outline: Verify end to end flow
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -230,8 +282,15 @@ Feature: Release Creation
       And   assert file is removed
       Then  Enter lyrics manually
       And   Select No in explicit content
+      Then  Select Yes in Previously release
+      And   Enter invalid links
+      And   Click on Continue button Add Release
+      Then Assert for the error message for invalid URL
       And   Select No in previously release
       Then  Click on Continue button Add Release
+      And   click on Here link
+      And   Assert if the modal opens
+      Then  click on cross icon
       Then  Enter first clip name "Hello Tune 1"
       And   Click Add more HT clip button
       And   Enter second clip name "Hello Tune 1"
@@ -240,6 +299,9 @@ Feature: Release Creation
       Then  Enter second clip name "Hello Tune 2"
       And   Click on Continue button Add Release
       Then  Select as soon as possile
+      And   Click on Continue button Add Release
+      Then  Click on edit button for Release uploaded
+      Then  Enter Release title
       And   Click on Continue button Add Release
       Then  Match the data is correct
       Then  Click on confirm and Submit

@@ -59,7 +59,7 @@ public class AuthorizationPage extends DriverActionUtils{
     public void enterEmailOnLoginPage() throws Exception {
 
         click(elements.getEmailAddressTextBox(), "EmailTextBox" );
-        type( elements.getEmailAddressTextBox(), "EmailTextBox", prodEmail, 5);
+        type( elements.getEmailAddressTextBox(), "EmailTextBox", emailArtist, 5);
     }
     public void enterEmailOnRegisterPage(String randomEmail) throws Exception
     {
@@ -102,7 +102,7 @@ public class AuthorizationPage extends DriverActionUtils{
 
     public void enterPasswordOnLoginPage() throws Exception {
         click(elements.getPasswordTextBox(), "PasswordTextBox" );
-        type((By) elements.getPasswordTextBox(), "PasswordTextBox", prodPassword, 5);
+        type((By) elements.getPasswordTextBox(), "PasswordTextBox", password, 5);
 
     }
 

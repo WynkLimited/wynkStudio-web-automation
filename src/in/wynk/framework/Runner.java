@@ -6,7 +6,7 @@ import cucumber.api.testng.PickleEventWrapper;
 import org.testng.annotations.Test;
 
 @CucumberOptions(plugin = {"json:target/cucumber-report/cucumber-report-feature-composite.json", "pretty", "rerun:target/rerun.txt"}, features = {"user-files/features"}, glue = {"in.wynk.steps"},
-        tags = {"~@wip","@karishma"}, monochrome = true, strict = true)
+        tags = {"~@wip","@karishma","~@P2"}, monochrome = true, strict = true)
 public class Runner extends Driver {
 
   @Test(dataProvider = "scenarios")

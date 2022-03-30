@@ -47,7 +47,10 @@ public class ReleaseCreationElements {
     private By hindiLanguage = By.xpath("//div[@class='ant-select-item-option-content'][contains(text(),'Hindi')]");
     private By genreDropDown = By.  xpath("//p[@id='genre']/following-sibling::div/div");
     private By genreSearchTextField = By.xpath("//p[@id='genre']/following-sibling::div//input");
-    private By bollywoodFemalVocal = By.xpath("//div[contains(text(),'Bachata')][@class='ant-select-item-option-content']");
+    private By bachataGenre = By.xpath("//div[contains(text(),'Bachata')][@class='ant-select-item-option-content']");
+    private By NativeAmericanGenre = By.xpath("//div[contains(text(),'Native american')][@class='ant-select-item-option-content']");
+    private By genreCloseButtonList = By.xpath("//p[@id='genre']/following-sibling::div//div[@class='ant-select-selection-overflow-item']" +
+            "//span[@aria-label='close']");
     private By uploadSongLyricsRadioButton = By.xpath("//p[contains(text(),'Upload sing along lyrics')]");
     private By uploadLyricsInLRC = By.xpath("//p[contains(text(),'Upload lyrics in .LRC format')]");
     private By uploadLyricTextRadioButton = By.xpath("//span[contains(text(),'Add lyrics text only')]");
@@ -59,18 +62,27 @@ public class ReleaseCreationElements {
     private By explicitNoRadioButton = By.xpath("//p[@id='explicitContent']/following-sibling::div//span[contains(text(),'No')]");
     private By previouslyReleasedYesRadioButton = By.xpath("//p[@id='previouslyReleased']/following-sibling::div//span[contains(text(),'Yes')]");
     private By previouslyReleasedNoRadioButton = By.xpath("//p[@id='previouslyReleased']/following-sibling::div//span[contains(text(),'No')]");
+    private By textBoxWherePreviouslyReleaseList = By.xpath("//p[@id='previouslyReleased']/following-sibling::div/p/following-sibling::div//input");
     private By backArrowSecondPage = By.xpath("//div[@class='arrow-link']");
+    private By addLRCFileViaBannerButton = By.xpath("//button[contains(@class,'ant-btn ant-btn-primary ant-btn-sm')]");
+    private By invalidURLErrorPreviouslyRelease  = By.xpath("//div[@role='alert'][contains(text(),'valid URL')]");
+
 
     //###################### common page ##########################
     private By backButton = By.xpath("//p[contains(text(),'Back')]");
     private By continueButton = By.xpath("//p[contains(text(),'Continue')]");
 
-    //###################### Second Page################################//
+    //###################### Third Page################################//
 
     private By htClipNameTextBox_1 = By.xpath("//div[@id='ht_0']//input");
     private By addMoreClip = By.xpath("//p[contains(text(),'Add more clips')]");
     private By htClipNameTextBox_2 = By.xpath("//div[@id='ht_1']//input");
     private By duplicateClipNameErrorMsg = By.xpath("//div[contains(text(),'Duplicate clipnames are not allowed')]");
+    private By htHelpPopUp = By.xpath("//div[@id='modal-root']//h5");
+    private By hereLink = By.xpath("//span[@class='modalText']");
+    private By htBannerImage = By.xpath("//img[@alt='helloTunes']");
+    private By htBannerText = By.xpath("//p[contains(text(),'*Wynk strongly believe to connect millions of list')]");
+    private By crossIcononBanner = By.xpath("//span[contains(@class, 'cursor_pointer')]//*[name()='svg']");
 
     //################### Schedule your release #####################
 
@@ -86,8 +98,9 @@ public class ReleaseCreationElements {
     private By primaryGenre = By.xpath("//span[contains(text(),'Genre')]/following-sibling::h5");
     private By lyrics = By.xpath("//span[contains(text(),'Lyrics')]/following-sibling::h5/span");
     private By explicitContent =By.xpath("//span[contains(text(),'Explicit Content')]/following-sibling::h5");
-    private By htName1 = By.xpath("//span[normalize-space()='Clip 1']/following-sibling::h5");
+    private By htName1 = By.xpath("//span[contains(text(),'Clip 1')]/following-sibling::h5");
     private By htName2 = By.xpath("//span[normalize-space()='Clip 2']/following-sibling::h5");
+    private By releaseUploadedEditButton = By.xpath("//h5[contains(text(),'Release uploaded')]/following-sibling::div/p");
 
 
 

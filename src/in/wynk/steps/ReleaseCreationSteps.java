@@ -386,4 +386,59 @@ public class ReleaseCreationSteps {
         Assert.assertTrue("Release name in correct",studioPage.getReleaseNameOnReleaseSummaryPage().equalsIgnoreCase("Karishma Automation"));
         Assert.assertTrue(" Not in in-review state",studioPage.getInReviewState().contains("Review"));
     }
+
+    @Then("select multiple Genre")
+    public void selectMultipleGenre() throws Exception {
+        releaseCreationPage.selectMultipleGenre();
+
+    }
+
+    @And("Assert that multiple Genre got selected")
+    public void assertThatMultipleGenreGotSelected() {
+       Assert.assertTrue( "Multiple genre are not selected", releaseCreationPage.countOfGenreSlected()>1);
+    }
+
+    @And("click on Here link")
+    public void clickOnHereLink() {
+        releaseCreationPage.clickHereLinkOnAddHTPage();
+    }
+
+    @And("Assert if the modal opens")
+    public void assertIfTheModalOpens() {
+      Assert.assertTrue("HT help banner is broken",  releaseCreationPage.isHTHelpBannerIntact());
+    }
+
+    @Then("click on cross icon")
+    public void clickOnCrossIcon() throws InterruptedException {
+        releaseCreationPage.clickCrossIconOnHTHelpBanner();
+        Thread.sleep(5000);
+
+    }
+
+    @And("Click on upload lyric button on modal")
+    public void clickOnUploadLyricButtonOnModal() throws InterruptedException {
+        releaseCreationPage.clickUploadLrcButtonOnBanner();
+    }
+
+    @Then("Select Yes in Previously release")
+    public void selectYesInPreviouslyRelease() {
+        releaseCreationPage.clickYesPreviouslyUploadedRadioButton();
+    }
+
+    @And("Enter invalid links")
+    public void enterInvalidLinks() {
+
+        releaseCreationPage.enterTextInReleaseLinkTextBox("karishma");
+    }
+
+    @Then("Assert for the error message for invalid URL")
+    public void assertForTheErrorMessageForInvalidURL() {
+
+        Assert.assertTrue("Invalid URL Error msg is not coming",releaseCreationPage.isWrongURLAlertPresentPreviouslyReleased());
+    }
+
+    @Then("Click on edit button for Release uploaded")
+    public void clickOnEditButtonForReleaseUploaded() {
+        releaseCreationPage.clickEditButtonForReleaseUploadedButton();
+    }
 }
