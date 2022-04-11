@@ -23,8 +23,6 @@ Feature: Release Creation
     Then  Enter Email <type_of_user>
     And   Enter Password
     Then  Click on Login
-    Then  Click on dashboard button
-    And   Click on studio home button
     Given User clicks on New Release button
     Then  click on Yes button on pop up
     Then  Click on continue Button on Pop up
@@ -220,32 +218,32 @@ Feature: Release Creation
       |type_of_user|
       |Artist         |
 
-    @Regression
-    Scenario Outline: Verify upload lyrics via upload lrc file on banner
-      Given User open Wynk studio Login page
-      Then  Enter Email <type_of_user>
-      And   Enter Password
-      Then  Click on Login
-      Then  Click on dashboard button
-      And   Click on studio home button
-      Given User clicks on New Release button
-      Then  click on Yes button on pop up
-      Then  Click on continue Button on Pop up
-      Then  click on upload audio button
-      And   upload audio file
-      Then  Enter Release title
-      Then  select ISRC
-      And   Select UPC
-      Then  click on upload artwork button
-      And   Upload Artwork File
-      And   Click on Continue button Add Release
-      Then  click on Here link
-      And   Click on upload lyric button on modal
-      Then  upload lyrics file
-      Then  Assert if the lyric file is successfully uploaded
-      Examples:
-        |type_of_user|
-        |Artist         |
+   # @Regression
+   # Scenario Outline: Verify upload lyrics via upload lrc file on banner
+   #   Given User open Wynk studio Login page
+   #   Then  Enter Email <type_of_user>
+   #   And   Enter Password
+   #   Then  Click on Login
+   #   Then  Click on dashboard button
+   #   And   Click on studio home button
+#      Given User clicks on New Release button
+#      Then  click on Yes button on pop up
+#      Then  Click on continue Button on Pop up
+#      Then  click on upload audio button
+#      And   upload audio file
+#      Then  Enter Release title
+#      Then  select ISRC
+#      And   Select UPC
+#      Then  click on upload artwork button
+#      And   Upload Artwork File
+#      And   Click on Continue button Add Release
+#      Then  click on Here link
+#      And   Click on upload lyric button on modal
+#      Then  upload lyrics file
+#      Then  Assert if the lyric file is successfully uploaded
+#      Examples:
+#        |type_of_user|
+#        |Artist         |
 
 
     @Smoke

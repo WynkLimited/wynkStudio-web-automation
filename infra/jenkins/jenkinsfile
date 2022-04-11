@@ -1,0 +1,82 @@
+pipeline {
+    agent {
+        node {
+            label "${Slave_Label}"
+        }
+    }
+    environment {
+       RUN_ON_PROXY = 'true'
+       FILTER = 'api.wynk.in,playback.wynk.in,reco.wynk.in,sync.wynk.in,play.wynk.in,content.wynk.in,usercontent.wynk.in,graph.wynk.in,search.wynk.in,secure.wynk.in,cm5.wynk.in,layout.wynk.in'
+       WIFI_NAME = 'dev,wynk,qa'
+       DEVICEFARM_HUB = 'http://192.168.105.72:4723/wd/hub'
+       DEVICEFARM_HOST = 'http://192.168.105.72:8082'
+       BROWSER = 'CHROME'
+       DEVICEFARM = 'false'
+       PERFORMANCE_DATA = ''
+       APP_NAME = 'backend'
+       VIDEO_GIF_INTEGRATION = 'true'
+       ENV_CHECK = 'false'
+       TAKE_SCREENSHOT = 'false'
+       ATTACH_NETWORK_LOGS = 'true'
+       ATTACH_ALL_NETWORK_LOGS = 'false'
+       PROXY_ADDRESS = 'http://10.41.11.190:8080'
+       SLACK_NOTIFICATION  =  'true'
+       SLACK_HANDLE  =  'wynk-studio-all-hands'
+       SLACK_WEB_HOOK = 'https://hooks.slack.com/services/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'
+       POD = ''
+       GIT_BRANCH = "${BRANCH}"
+       NO_RESET = 'true'
+       GENERATE_SS_USING_ADB = 'false'
+       PERFORMANCE = 'false'
+       TEST_CASE_SHEET = ''
+       KIBANA_URL = ''
+       DEVELOPER_EMAIL_ADDRESS = "${TO}"
+       PASS_PERCENTAGE = '80'
+       APP_VERSION  =  ''
+       reportUrl = "http://jenkins-new.airtel.tv/view/Gaming/job/$env.JOB_NAME/$env.BUILD_NUMBER/cucumber-html-reports/overview-features.html"
+
+   }
+    stages {
+        stage('running script') {
+            steps {
+		         sh '''
+                    #!/bin/bash -l
+                    ./command_for_docker.sh
+                '''
+        }
+    }
+  }
+    post {
+  	     failure {
+
+  	      echo "Test failed"
+                      cucumber buildStatus: 'FAIL',
+                                   failedFeaturesNumber: 1,
+                                   failedScenariosNumber: 1,
+                                   skippedStepsNumber: 1,
+                                   failedStepsNumber: 1,
+                                   fileIncludePattern: 'target/cucumber-report/*.json',
+                                   sortingMethod: 'ALPHABETICAL'
+
+        //  slackSend color: 'red', message: "${params.reportname} Tests failed. >> Click to view <$reportUrl|report>"
+            emailext body: "Tests failed. >> Click to view $reportUrl", subject: "Cucumber Test Report | Project : Gaming", to: "${DEVELOPER_EMAIL_ADDRESS}"
+
+  	     }
+
+  	      success {
+
+          echo "Test succeeded"
+                     cucumber buildStatus: 'SUCCESS',
+                                            failedFeaturesNumber: 0,
+                                            failedScenariosNumber: 0,
+                                            skippedStepsNumber: 0,
+                                            failedStepsNumber: 0,
+                                            fileIncludePattern: 'target/cucumber-report/*.json',
+                                            sortingMethod: 'ALPHABETICAL'
+
+            emailext body: readFile("/var/lib/jenkins/jobs/$env.JOB_NAME/builds/$env.BUILD_NUMBER/cucumber-html-reports/overview-features.html"), subject: "Cucumber Test Report | Project : Gaming", to: "${DEVELOPER_EMAIL_ADDRESS}" , mimeType: "text/html"
+
+          }
+  }
+}
+

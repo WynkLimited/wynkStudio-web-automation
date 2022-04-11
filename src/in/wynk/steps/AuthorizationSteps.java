@@ -124,7 +124,7 @@ public class AuthorizationSteps {
 
         if(typeOfUser.equalsIgnoreCase("NUX"))
         {
-            authpage.enterEmailOnLoginPage(randomEmail);
+            authpage.enterEmailOnLoginPage(emailId);
 
         }
         else if (typeOfUser.equalsIgnoreCase("Invalid"))

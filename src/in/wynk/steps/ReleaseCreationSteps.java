@@ -127,9 +127,9 @@ public class ReleaseCreationSteps {
 
     @Then("Assert Error Msgs on Required Fields Upload Release Page")
     public void assertErrorMsgsOnRequiredFieldsUploadReleasePage() {
-        Assert.assertTrue("Error Msg not coming",
+        Assert.assertTrue("Error Msg Regressionming",
                 releaseCreationPage.isErrorMsgsForMissingFieldUploadReleasePage());
-        Assert.assertTrue("Artwork Error Msg not coming",releaseCreationPage.isArtworkMissingAlertPresent());
+        Assert.assertTrue("Artwork Error Msg Regressionming",releaseCreationPage.isArtworkMissingAlertPresent());
     }
 
     @Then("click on upload audio button")
@@ -247,7 +247,7 @@ public class ReleaseCreationSteps {
     @And("assert that the name of Primary artist is correct")
     public void assertThatTheNameOfPrimaryArtistIsCorrect() {
 
-        Assert.assertTrue("Primary name is not correct", nameOfPrimaryArtist.equalsIgnoreCase(releaseCreationPage.readPrimaryArtistName()));
+        Assert.assertTrue("Primary name is Regressionrrect", nameOfPrimaryArtist.equalsIgnoreCase(releaseCreationPage.readPrimaryArtistName()));
     }
 
     @Then("Select Supporting Artist role and enter name")

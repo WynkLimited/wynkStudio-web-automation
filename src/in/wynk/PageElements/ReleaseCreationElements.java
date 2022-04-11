@@ -14,7 +14,7 @@ public class ReleaseCreationElements {
     private By uploadAudioButton = By.xpath("//p[@id='releaseAudio']/following-sibling::div//p[contains(text(),'Select audio file')]");
     private By textOfUploadedFileList = By.xpath("//p[@id='releaseAudio']/following-sibling::div//p");
     private By releaseTitleTextBox =By.xpath("//div/input[@class='ant-input']");
-    private By crossButtonPopUp =By.xpath("//span[@class='svgicon__IconWrapper-sc-gxfrqa-0 dzUXSY icon cursor_pointer']//*[name()='svg']");
+    private By crossButtonPopUp =By.xpath("//h5[contains(text(),'Tell us about your release')]/following-sibling::span");
     private By backdropModal = By.id("backdrop-modal");
     private By contactUsPopUp = By.xpath("//button/span[contains(text(),'Contact us')]");
     private By addReleaseDetailHeadingOnPage =By.xpath("//h3[contains(text(),'Add Release Details')]");
@@ -29,7 +29,7 @@ public class ReleaseCreationElements {
     private By addYourReleaseDetailsHeader = By.xpath("//h4[contains(text(),'Add your release details')]");
     private By songProgressBar = By.xpath("//div[@class='ant-progress-bg']");
     private By playButton = By.xpath("//div[@class='ant-form-item-control-input-content']//button");
-    private By crossButton =By.xpath("//span[contains(@class,'crossIcon')] ");
+    private By crossButton =By.xpath("//span[contains(@class,'crossIcon')]");
     private By yesForUPC = By.xpath("//span[contains(text(),'Yes, I have UPC')]");
     private By yesForISRC =By.xpath("//span[contains(text(),'Yes, I have ISRC')]");
 

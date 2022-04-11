@@ -6,13 +6,13 @@ Feature: Auth
     @Auth
     Scenario: Verify new user signup
     Given User open Wynk studio Register page
-    Then Enter EmailId on Register Page
-    And  Enter Password
-    And  Enter Full Name
-    Then Click on Create Account
-    And Read verification Link using Mailinator API
-    Then Hit verification link sent over mail
-    Then Assert User should be on profession page
+    Then  Enter EmailId on Register Page
+    And   Enter Password
+    And   Enter Full Name
+    Then  Click on Create Account
+    And   Read verification Link using Mailinator API
+    Then  Hit verification link sent over mail
+    Then  Assert User should be on profession page
 
   @Sanity
     @Auth
@@ -39,7 +39,7 @@ Feature: Auth
     Then Assert User should be in Logged in State
     Examples:
       |type_of_user|
-      |RUX         |
+      |Artist         |
 
   @Regression
     @Auth

@@ -13,9 +13,9 @@ public class AuthorizationPage extends DriverActionUtils{
     in.wynk.framework.Assert anAssert;
     AuthPageElements elements;
     //String password = "Abcd@12345";
-    String password = "Abcd@12345", prodPassword = "abcdef";
+    String password = "Abcd@12345", prodPassword = "Prateek@123";
     Utils utility;
-    String emailArtist = "karishmakoul2@gmail.com", prodEmail = "chassi.koul@gmail.com";
+    String emailArtist = "karishmakoul2@gmail.com", prodEmail = "Prateekgandhiaum@gmail.com";
 
 
 

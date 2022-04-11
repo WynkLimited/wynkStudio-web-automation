@@ -22,8 +22,6 @@ public class CreateArtistPage  extends DriverActionUtils {
     static int counter =0;
 
 
-
-
     public CreateArtistPage( CreateArtistElements createArtistElements,
                              Reporting Reporter, in.wynk.framework.Assert Assert,
                              in.wynk.framework.SoftAssert SoftAssert)
@@ -254,6 +252,7 @@ public class CreateArtistPage  extends DriverActionUtils {
     public void typeArtistNameInTextBox(String name) throws Exception
     {
         click(createArtistElements.getTypeYourNameTextBox(), "Email Text Box on Forgot Password Page" );
+        Thread.sleep(2000);
         type( createArtistElements.getTypeYourNameTextBox(), "Artist Name Text Box on Create or claim Artist Page", name, 5);
     }
 

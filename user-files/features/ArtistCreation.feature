@@ -1,9 +1,9 @@
 @artistCreation
 Feature: Artist Creation
 
-  @smoke
-  @regression
-  @sanity
+  @Smoke
+  @Regression
+  @Sanity
     @artistCreation
 
     Scenario: Verify Create Or claim artist profile page
@@ -38,7 +38,7 @@ Feature: Artist Creation
       |type_of_user|
       |RUX         |
 
-    @sanity
+    @Sanity
     Scenario Outline: Verify if Artist wants to proceed without filling mandatory fields on Add Artist Details Page
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -55,7 +55,7 @@ Feature: Artist Creation
         |type_of_user|
         |RUX         |
 
-    @smoke
+    @Smoke
     Scenario Outline: Verify photo upload functionality by Artist
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -73,7 +73,7 @@ Feature: Artist Creation
         |RUX         |
 
 
-    @regression @sanity
+    @Regression @Sanity
     Scenario Outline: Verify if Artist wants to upload more photos
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -92,7 +92,7 @@ Feature: Artist Creation
         |type_of_user|
         |RUX         |
 
-  @regression
+  @Regression
   Scenario Outline: Verify if Artist wants to update existing profile pic
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -112,7 +112,7 @@ Feature: Artist Creation
       |type_of_user|
       |RUX         |
 
-  @regression
+  @Regression
   Scenario Outline: Verify if Artist updates photo with wrong extension
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -129,7 +129,7 @@ Feature: Artist Creation
       |RUX         |
 
 
-    @sanity
+    @Sanity
     Scenario Outline: Verify that name entered on create or claim artist page is copied on Artist name text box on Add Artist details page
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -141,7 +141,7 @@ Feature: Artist Creation
         |type_of_user|
         |RUX         |
 
-  @smoke
+  @Smoke
   Scenario Outline: Verify that user's profile is created when user clicks on continue after filling out all the mandatory fields
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>

@@ -26,7 +26,8 @@ public class LoginPage extends DriverActionUtils {
     HomePage homePage;
     in.wynk.framework.Assert anAssert;
 
-    public LoginPage(HomePage homePage , CommonPage commonPage, API api, Reporting Reporter, in.wynk.framework.Assert Assert, in.wynk.framework.SoftAssert SoftAssert) {
+    public LoginPage(HomePage homePage , CommonPage commonPage, API api,
+                     Reporting Reporter, in.wynk.framework.Assert Assert, in.wynk.framework.SoftAssert SoftAssert) {
 
         super(Reporter, Assert, SoftAssert);
         this.homePage=homePage;

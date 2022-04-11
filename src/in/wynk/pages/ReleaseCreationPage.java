@@ -295,7 +295,7 @@ ReleaseCreationElements releaseCreationElements;
         { //do nothing
         }
         process.destroy();
-        Thread.sleep(20000);
+        Thread.sleep(25000);
 
         releaseValidator.put("artworkHref",
                 getElementWhenPresent(releaseCreationElements.getArtworkHref(), 5).

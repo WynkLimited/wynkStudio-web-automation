@@ -1,5 +1,6 @@
 package in.wynk.steps;
 
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import in.wynk.pages.CommonPage;
@@ -57,5 +58,6 @@ public class WatchlistStep {
     public void verify_remove_from_watchlist_icon_visible_on_hover_on_watchlist_content() {
         watchlistPage.verifyRemoveFromWatchlistIcon();
     }
+
 
 }
