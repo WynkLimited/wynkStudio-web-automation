@@ -2,9 +2,9 @@
 Feature: Auth
 
 
-  @Smoke
+  @Regression
     @Auth
-    Scenario: Verify new user signup
+  Scenario: Verify new user signup
     Given User open Wynk studio Register page
     Then  Enter EmailId on Register Page
     And   Enter Password
@@ -16,6 +16,8 @@ Feature: Auth
 
   @Sanity
     @Auth
+  @Regression
+
   Scenario: Verify new user signup with used verification code
     Given User open Wynk studio Register page
     Then Enter EmailId on Register Page
@@ -31,6 +33,8 @@ Feature: Auth
 
   @Smoke
     @Auth
+    @Regression
+
   Scenario Outline: Login with a RUX user
     Given User open Wynk studio Login page
     Then Enter Email <type_of_user>
@@ -43,6 +47,7 @@ Feature: Auth
 
   @Regression
     @Auth
+
   Scenario Outline: Login with a invalid RUX user
     Given User open Wynk studio Login page
     Then Enter Email <type_of_user>
@@ -56,6 +61,7 @@ Feature: Auth
 
   @Regression
     @Auth
+
     Scenario Outline: Verify that user whose email verification is pending is not able to signin
     Given User open Wynk studio Register page
     Then Enter EmailId on Register Page
@@ -75,6 +81,8 @@ Feature: Auth
 
   @Sanity
     @Auth
+    @Regression
+
   Scenario Outline: Verify that Forgot Password with RUX and invalid users
     Given User open Wynk studio Login page
     And Click on Forgot Password
@@ -89,11 +97,13 @@ Feature: Auth
 
     @Smoke
     @Auth
+      @Regression
+
   Scenario Outline: Verify that Correct Home Page opens for Artist and Podcaster
     Given User open Wynk studio Login page
-    And Enter Email <type_of_user>
-    And  Enter Password
-    And Click on Login
+    And  Enter Email <type_of_user>
+    And  Enter Password <type_of_user>
+    And  Click on Login
     Then Assert that correct home page is shown to the user <type_of_user>
     Examples:
       |type_of_user|

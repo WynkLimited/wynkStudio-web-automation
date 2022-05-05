@@ -9,7 +9,7 @@ public class CommonElements {
     private By profileButton = By.xpath("//div[contains(@class,'Initials')]");
     private By allSongsPodcastdivHomePage = By.xpath("//div[@class='infinite-scroll-component infinite-scroll-container']");
     private By allSongPodcastListHomePage = By.xpath("//div[@class='infinite-scroll-component infinite-scroll-container']/div");
-    private By searchBoxStudioPage = By.xpath("//span[@class='ant-input-affix-wrapper']");
+    private By searchBoxStudioPage = By.xpath("//span[contains(@class,'input')]/following::input");
     private By inReviewReleasesummary = By.xpath("//p[contains(text(),'In-review')]");
     private By inDraft = By.xpath("//div[contains(@aria-controls,'IN_DRAFT')]");
     private By titleList = By.xpath("//h3[contains(@class,'Title')]");
@@ -24,7 +24,10 @@ public class CommonElements {
     private By draftTabText = By.xpath("//div[contains(@class,'ant-tabs-tab')]/div[contains(text(),'Draft')]");
     private By inReviewTabText = By.xpath("//div[contains(@class,'ant-tabs-tab')]/div[contains(text(),'In-review')]");
     private By rejectedTabText = By.xpath("//div[contains(@class,'ant-tabs-tab')]/div[contains(text(),'Rejected')]");
+    private By verificationPendingText = By.xpath("//div[contains(@class,'ant-tabs-tab')]/div[contains(text(),'Verification Pending')]");
     private By songNameOnTilesTextList = By.xpath("//div[@id='releases-container']//div/h3[not(contains(text(),'Studio Home'))]");
+    private By crossSign = By.xpath("//span[contains(@class,' cursor_pointer')]//*[name()='svg']");
+    private By noSearchResult = By.xpath("//div[contains(@class,'input-filled')]/div[@class=' search-suggestions-container']//p[contains(text(),'No Search Results')]");
 
 }
 

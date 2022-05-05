@@ -81,15 +81,14 @@ public class AuthorizationSteps {
     @Then("Click on Login")
     public void clickOnLogin() throws Exception
     {
-         authpage.clickLoginButtonOnLoginPage();
+       authpage.clickLoginButtonOnLoginPage();
     }
 
     @Then("Assert User should not be in Logged in State")
     public void assertUserShouldNotBeInLoggedInState()
     {
-        authpage.clickCrossButtonNotification();
-        Assert.assertTrue(authpage.isPasswordTextBoxPresent());
-        Assert.assertTrue(authpage.isLoginButtonPresent());
+        boolean flag = authpage.isFailureNotificationPresent() | authpage.isIncorrectUsernamePasswordPresent();
+        Assert.assertTrue(flag);
     }
 
     @Given("User open Wynk studio Register page")
@@ -98,8 +97,6 @@ public class AuthorizationSteps {
         commonPage.navigateToPage(CommonPage.navigationOption.REGISTER);
         Assert.assertTrue(authpage.isPasswordTextBoxPresent());
     }
-
-
 
     @And("Enter Full Name on Register Page")
     public void enterFullNameOnRegisterPage() throws Exception {
@@ -125,7 +122,6 @@ public class AuthorizationSteps {
         if(typeOfUser.equalsIgnoreCase("NUX"))
         {
             authpage.enterEmailOnLoginPage(emailId);
-
         }
         else if (typeOfUser.equalsIgnoreCase("Invalid"))
         {
@@ -138,7 +134,7 @@ public class AuthorizationSteps {
         }
         else if(typeOfUser.equalsIgnoreCase("Podcast"))
         {
-            authpage.enterEmailOnLoginPage("podcast10@yopmail.com");
+            authpage.enterEmailOnLoginPage("subhra.dash@yopmail.com");
         }
         else if (typeOfUser.equalsIgnoreCase("Artist"))
         {
@@ -263,5 +259,17 @@ public class AuthorizationSteps {
     }
 
 
+    @And("Enter Password (.+)")
+    public void enterPasswordTypeOfUser(String typeOfUser) throws Exception {
 
+        if(typeOfUser.equalsIgnoreCase("Podcast"))
+        {
+           authpage.enterPasswordOnLoginPage("123456");
+        }
+    else if (typeOfUser.equalsIgnoreCase("Artist"))
+    {
+        authpage.enterPasswordOnLoginPage();
+    }
+
+    }
 }

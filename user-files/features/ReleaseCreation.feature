@@ -2,6 +2,7 @@
 Feature: Release Creation
 
   @Regression
+    @releasecreation
   Scenario Outline: Verify a pop up open when user clicks on '+ Add new release' button.
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -17,6 +18,7 @@ Feature: Release Creation
     |Artist      |
 
   @Regression
+    @releasecreation
 
   Scenario Outline: Verify adding multiple Genre
     Given User open Wynk studio Login page
@@ -29,6 +31,7 @@ Feature: Release Creation
     Then  click on upload audio button
     And   upload audio file
     Then  Enter Release title
+    Then  Select Check box for Album Title
     Then  select ISRC
     And   Select UPC
     Then  click on upload artwork button
@@ -41,6 +44,7 @@ Feature: Release Creation
       |Artist         |
 
     @Regression
+      @releasecreation
     Scenario Outline: Verify click on cross Button on pop up
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -54,6 +58,7 @@ Feature: Release Creation
         |Artist         |
 
     @Regression
+      @releasecreation
     Scenario Outline: Verify click on No Radio Button on pop up
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -67,6 +72,8 @@ Feature: Release Creation
       |Artist         |
 
   @Sanity
+    @Regression
+    @releasecreation
   Scenario Outline: Verify click on Yes Radio Button on  pop up
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -81,6 +88,7 @@ Feature: Release Creation
       |Artist         |
 
   @Regression
+    @releasecreation
   Scenario Outline: Verify click on Back Arrow Button on  pop up
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -96,6 +104,8 @@ Feature: Release Creation
       |Artist         |
 
   @Sanity
+    @Regression
+    @releasecreation
   Scenario Outline: Verify Error Alerts are coming if user clicks on continue without filling the details on Upload Release Pgae
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -111,6 +121,8 @@ Feature: Release Creation
       |Artist         |
 
   @Sanity
+    @Regression
+    @releasecreation
   Scenario Outline: Verify if audio file is getting played till 100% completion
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -128,6 +140,7 @@ Feature: Release Creation
       |Artist         |
 
   @Regression
+    @releasecreation
   Scenario Outline: Verify clicking on cross button is removing the uploaded audio file
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -145,6 +158,8 @@ Feature: Release Creation
       |Artist         |
 
   @Sanity
+    @Regression
+    @releasecreation
   Scenario Outline: Verify Uploading a valid audio file with .WAV/.WMA file
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -162,6 +177,8 @@ Feature: Release Creation
       |Artist      |
 
   @Sanity
+    @Regression
+    @releasecreation
   Scenario Outline: Verify Uploading a less than 800 * 800 resolution artwork
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -179,6 +196,7 @@ Feature: Release Creation
 
 
   @Regression
+    @releasecreation
   Scenario Outline: Verify when user clicks on continue without entering UPC and ISRC Code
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -197,6 +215,7 @@ Feature: Release Creation
 
 
   @Regression
+    @releasecreation
   Scenario Outline: Verify Upload Release Page
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -208,6 +227,7 @@ Feature: Release Creation
     Then  click on upload audio button
     And   upload audio file
     Then Enter Release title
+    Then  Select Check box for Album Title
     Then select ISRC
     And Select UPC
     Then click on upload artwork button
@@ -247,6 +267,8 @@ Feature: Release Creation
 
 
     @Smoke
+      @Regression
+      @releasecreation
     Scenario Outline: Verify end to end flow
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -260,6 +282,7 @@ Feature: Release Creation
       Then  click on upload audio button
       And   upload audio file
       Then  Enter Release title
+      Then  Select Check box for Album Title
       Then  select ISRC
       And   Select UPC
       Then  click on upload artwork button
@@ -279,11 +302,12 @@ Feature: Release Creation
       And   Remove lyrics file
       And   assert file is removed
       Then  Enter lyrics manually
+      Then  Enter Publisher Name
       And   Select No in explicit content
       Then  Select Yes in Previously release
       And   Enter invalid links
       And   Click on Continue button Add Release
-      Then Assert for the error message for invalid URL
+      Then  Assert for the error message for invalid URL
       And   Select No in previously release
       Then  Click on Continue button Add Release
       And   click on Here link

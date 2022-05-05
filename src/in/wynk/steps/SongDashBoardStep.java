@@ -1,5 +1,6 @@
 package in.wynk.steps;
 
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import in.wynk.framework.SoftAssert;
@@ -7,6 +8,8 @@ import in.wynk.framework.Utils;
 import in.wynk.pages.*;
 import junit.framework.Assert;
 
+import java.util.Iterator;
+import java.util.Set;
 
 
 public class SongDashBoardStep {
@@ -18,12 +21,16 @@ public class SongDashBoardStep {
     ArtistHomePage studioPage;
     Utils utility;
     ReleaseSummaryPage releaseSummaryPage;
-    String nameOfSong = null;
+    String nameOfSong = null, key =null;
+    Double totalStream , uniqueListens, followerCount;
     boolean flag = false ;
+    String uniqueListenerReleasePage, totalStreamReleasePage, followerCountReleasePage, likeReleasePage, htActivatedReleasePage;
 
 
     public SongDashBoardStep(AuthorizationPage authpage, CommonStudioPage commonStudioPage, SoftAssert anAssert,
-                              ArtistHomePage studioPage, Utils utility, SongDashboardPage songDashboardPage, ReleaseSummaryPage releaseSummaryPage)
+                             ArtistHomePage studioPage
+                             , Utils utility, SongDashboardPage songDashboardPage,
+                             ReleaseSummaryPage releaseSummaryPage)
     {
         this.authpage = authpage;
         this.anAssert =  anAssert;
@@ -32,6 +39,7 @@ public class SongDashBoardStep {
         this.utility = utility;
         this.songDashboardPage = songDashboardPage;
         this.releaseSummaryPage = releaseSummaryPage;
+
 
     }
 
@@ -63,10 +71,11 @@ public class SongDashBoardStep {
     @And("Assert that in All song tab contains all types of songs")
     public void assertThatInAllSongTabContainsAllTypesOfSongs() {
 
+
         commonStudioPage.verifySongCountIsCorrect(CommonStudioPage.tabOption.ALL);
+        commonStudioPage.verifySongCountIsCorrect(CommonStudioPage.tabOption.DRAFT);
         commonStudioPage.verifySongCountIsCorrect(CommonStudioPage.tabOption.LIVE);
         commonStudioPage.verifySongCountIsCorrect(CommonStudioPage.tabOption.INREVIEW);
-        commonStudioPage.verifySongCountIsCorrect(CommonStudioPage.tabOption.LIVE);
         commonStudioPage.verifySongCountIsCorrect(CommonStudioPage.tabOption.REJECTED);
     }
 
@@ -152,19 +161,218 @@ public class SongDashBoardStep {
 
     @Then("Click first live song is clickable")
     public void clickFirstLiveSongIsClickable() {
-        if(flag)
-      songDashboardPage.clickFirstLiveSongInTable();
+
+        flag = songDashboardPage.clickFirstLiveSongInTable();
     }
 
     @And("Assert the name of song click on Release Summary page")
     public void assertTheNameOfSongClickOnReleaseSummaryPage() {
 
-        if(flag) {
-            Assert.assertTrue(songDashboardPage.songAnalyticsForValidation.get(
-                            (songDashboardPage.getHeaderName(SongDashboardPage.HeaderName.TITLE))).
-                    equalsIgnoreCase(releaseSummaryPage.getNameOfSong()));
-        }
+        if(flag)
+            Assert.assertTrue(songDashboardPage.songAnalyticsForValidation.containsKey(releaseSummaryPage.getNameOfSong()));
+
 
     }
+
+    @Then("click on Filter")
+    public void clickOnFilter() {
+
+        songDashboardPage.clickLastXDaysDropDown();
+    }
+
+    @And("select Last {int} days Filter from drop down")
+    public void selectLastDaysFilterFromDropDown(int arg0) {
+
+        if(arg0 == 30)
+            songDashboardPage.clickLast30DaysFilterInsideDropDown();
+        else if(arg0 == 90)
+            songDashboardPage.clickLast90DaysFilterInsideDropDown();
+    }
+
+    @Then("Assert filter name is changed to Last {int} days")
+    public void assertFilterNameIsChangedToLastDays(int arg0)
+    {
+        Assert.assertTrue(songDashboardPage.getLastXDaysDropDownText().contains(String.valueOf(arg0)));
+    }
+
+    @And("Assert content is coming for all the songs in the table")
+    public void assertContentIsComingForAllTheSongsInTheTable() {
+        songDashboardPage.checkIfDataIsComingForAllTheSongs();
+    }
+
+    @And("Assert unique Stream and Total Stream count is greater than previous filter")
+    public void assertUniqueStreamAndTotalStreamCountIsGreaterThanPreviousFilter()
+    {
+        Assert.assertTrue(totalStream<=utility.convertCountToDouble(songDashboardPage.getTotalStreamsCount())
+       && uniqueListens <= utility.convertCountToDouble(songDashboardPage.getUniqueListenersCount())
+               && followerCount <= utility.convertCountToDouble(songDashboardPage.getFollowersCount()
+               ));
+    }
+
+    @Then("click on download Button")
+    public void clickOnDownloadButton() {
+        songDashboardPage.clickDownloadButton();
+
+
+    }
+
+    @Then("Pick random dates in current month")
+    public void pickRandomDatesInCurrentMonth() {
+        songDashboardPage.pickDatesRandomlyInCurrentMonth();
+    }
+
+    @And("click on done button in Download section")
+    public void clickOnDoneButtonInDownloadSection() {
+        songDashboardPage.clickDoneButtonInDownloadSection();
+        Assert.assertTrue(songDashboardPage.isNotificationMsgForSuccessfulDownloadPresent());
+        int x = 0;
+    }
+
+    @And("Select All the time")
+    public void selectAllTheTime() {
+        songDashboardPage.clickAllTheTimeRadioButton();
+    }
+
+    @Then("Click on cross button present in download section")
+    public void clickOnCrossButtonPresentInDownloadSection() {
+        songDashboardPage.clickCrossInDownloadSection();
+    }
+
+    @Then("click on any song present in dashboard")
+    public void clickOnAnySongPresentInDashboard()
+    {
+      songDashboardPage.clickFirstLiveSongInTable();
+    }
+
+
+
+    @Then("Check by default last {int} days Filter should be selected")
+    public void checkByDefaultLastDaysFilterShouldBeSelected(int arg0) {
+        songDashboardPage.isLastXDaysFilterPresent(arg0);
+    }
+
+    @And("Click on Unique Listenes")
+    public void clickOnUniqueListenes() {
+        uniqueListenerReleasePage = releaseSummaryPage.getUniqueListenReleasePage();
+        releaseSummaryPage.clickUniqueListensBox();
+    }
+
+    @Then("Assert that a Trends pop up is coming up with correct count {string}")
+    public void assertThatATrendsPopUpIsComingUpWithCorrectCount(String arg0) {
+        if(arg0.equalsIgnoreCase("uniqueListens")) {
+            Assert.assertTrue("Unique listen count on relase page and graph is not same",
+                    releaseSummaryPage.getUniqueListenTrendGraph().equalsIgnoreCase(uniqueListenerReleasePage));
+
+        }
+        else if(arg0.equalsIgnoreCase("totalStreams"))
+        {
+            Assert.assertTrue("Total streams count on relase page and graph is not same",
+                    releaseSummaryPage.getTotalStreamsTrendGraph().equalsIgnoreCase(totalStreamReleasePage));
+        }
+        else if(arg0.equalsIgnoreCase("likes"))
+        {
+            Assert.assertTrue("Total streams count on relase page and graph is not same",
+                    releaseSummaryPage.getHTActivatedTrendGraph().equalsIgnoreCase(likeReleasePage));
+        }
+        else if(arg0.equalsIgnoreCase("ht"))
+        {
+            Assert.assertTrue("Total streams count on relase page and graph is not same",
+                    releaseSummaryPage.getHTActivatedTrendGraph().equalsIgnoreCase(htActivatedReleasePage));
+        }
+        Assert.assertTrue("Graph on Trend pop up is not coming", releaseSummaryPage.isGraphPresentOnTrendsPage());
+    }
+
+    @Then("click on cross button on Trends pop up")
+    public void clickOnCrossButtonOnTrendsPopUp() {
+        releaseSummaryPage.clickCrossIcon();
+    }
+
+    @And("Click on Total Streams")
+    public void clickOnTotalStreams() {
+        totalStreamReleasePage = releaseSummaryPage.getTotalStreamsReleasePage();
+        releaseSummaryPage.clickTotalStreamsBox();
+    }
+
+    @And("Assert Total Streams and Unique Listenes Graphs are displaying")
+    public void assertTotalStreamsAndUniqueListenesGraphsAreDisplaying()
+    {
+         releaseSummaryPage.ifGraphPresentRowWise();
+    }
+
+    @And("Assert that graph should be disappeared")
+    public void assertThatGraphShouldBeDisappeared() {
+    }
+
+    @And("Read values of unique listens, total stream and follower from dashboard")
+    public void readValuesOfUniqueListensTotalStreamAndFollowerFromDashboard() {
+
+        totalStream = utility.convertCountToDouble(songDashboardPage.getTotalStreamsCount());
+        uniqueListens= utility.convertCountToDouble(songDashboardPage.getUniqueListenersCount());
+        followerCount = utility.convertCountToDouble(songDashboardPage.getFollowersCount());
+    }
+
+    @Then("Click first row in Release summary page")
+    public void clickFirstRowInReleaseSummaryPage() {
+
+        releaseSummaryPage.clickFirstLiveSongInTable();
+    }
+
+    @Then("click on play button on Release Summary page")
+    public void clickOnPlayButtonOnReleaseSummaryPage() {
+      Assert.assertTrue(releaseSummaryPage.clickPlayButton().equalsIgnoreCase(releaseSummaryPage.getNameOfSong()));
+    }
+
+    @And("Assert that song name is same on Wynk and Wynk studio")
+    public void assertThatSongNameIsSameOnWynkAndWynkStudio() {
+
+    }
+
+
+    @Then("Assert that Live song is appearing in the results of search")
+    public void assertThatLiveSongIsAppearingInTheResultsOfSearch()
+    {
+        Assert.assertTrue(commonStudioPage.getInnerHtmlSearchContainer().contains(nameOfSong));
+    }
+
+    @And("Click on the song in result")
+    public void clickOnTheSongInResult() {
+
+        flag = commonStudioPage.getInnerHtmlSearchContainer().contains(nameOfSong);
+
+         if (flag)
+            commonStudioPage.clickFirstSongSearchResult();
+    }
+
+
+    @Then("Click on cross icon")
+    public void clickOnCrossIcon() {
+        commonStudioPage.clickCrossSignInSearchBar();
+    }
+
+    @Then("Assert that No Search Results should appear")
+    public void assertThatNoSearchResultsShouldAppear() throws InterruptedException {
+
+        Assert.assertTrue(commonStudioPage.isNoSearchResultFoundPresent());
+    }
+
+    @And("Search song for that artist {string}")
+    public void searchSongForThatArtist(String arg0) throws Exception {
+
+        if(arg0 == null | arg0 == " " | arg0.isEmpty() ) {
+            Iterator<String> itr = songDashboardPage.songAnalyticsForValidation.keySet().iterator();
+            while (itr.hasNext()) {
+                nameOfSong = itr.next();
+                commonStudioPage.enterSongNameInSearchBox(nameOfSong);
+                break;
+            }
+        }
+        else
+        {
+            commonStudioPage.enterSongNameInSearchBox(arg0);
+        }
+    }
+
+
+
 
 }

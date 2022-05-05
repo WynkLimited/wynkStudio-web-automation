@@ -26,7 +26,7 @@ public class DashboardElements {
     //This xpath has to be parameterized by month
     // //div[@class='rdrMonthName'][contains(text(),'Mar')]/following-sibling::div/button[@class='rdrDay']//span[@class='rdrDayNumber']
     private By dateSelectedList = By.xpath("//div[@class='rdrDateDisplay']//span/input");
-    private By crossDownloadButton=By.xpath("//span[contains(@class,'StyledCrossIcon')]//*[name()='svg']");
+    private By crossDownloadButton=By.xpath("//div[@id='modal-container']//h5/parent::div/parent::div/following-sibling::span/*[name()='svg']");
     private By notificationMsgForSuccessfulDownload = By.xpath("//div[@class='ant-notification-notice-message'][contains(text(),'Your report is being downloaded')]");
     private By likesAndHTActivatesTextList = By.xpath("//div[contains(@class,'CompactContainer')]//span[not(contains(@class,'icon'))]") ;
     private By followerButton = By.xpath("//div[contains(@class,'PodcastStatsWrapper')]//p[contains(text(),'FOLLOWERS')]");

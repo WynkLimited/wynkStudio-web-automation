@@ -13,9 +13,9 @@ public class AuthorizationPage extends DriverActionUtils{
     in.wynk.framework.Assert anAssert;
     AuthPageElements elements;
     //String password = "Abcd@12345";
-    String password = "Abcd@12345", prodPassword = "Prateek@123";
+    String password = "Abcd@12345", prodPassword = "abcdef";
     Utils utility;
-    String emailArtist = "karishmakoul2@gmail.com", prodEmail = "Prateekgandhiaum@gmail.com";
+    String emailArtist = "karishmakoul2@gmail.com", prodEmail = "chassi.koul@gmail.com";
 
 
 
@@ -59,7 +59,7 @@ public class AuthorizationPage extends DriverActionUtils{
     public void enterEmailOnLoginPage() throws Exception {
 
         click(elements.getEmailAddressTextBox(), "EmailTextBox" );
-        type( elements.getEmailAddressTextBox(), "EmailTextBox", emailArtist, 5);
+        type( elements.getEmailAddressTextBox(), "EmailTextBox", prodEmail, 5);
     }
     public void enterEmailOnRegisterPage(String randomEmail) throws Exception
     {
@@ -102,12 +102,28 @@ public class AuthorizationPage extends DriverActionUtils{
 
     public void enterPasswordOnLoginPage() throws Exception {
         click(elements.getPasswordTextBox(), "PasswordTextBox" );
+        type((By) elements.getPasswordTextBox(), "PasswordTextBox", prodPassword, 5);
+
+    }
+    public void enterPasswordOnLoginPage(String password) throws Exception {
+        click(elements.getPasswordTextBox(), "PasswordTextBox" );
         type((By) elements.getPasswordTextBox(), "PasswordTextBox", password, 5);
 
     }
 
-    public void clickLoginButtonOnLoginPage() throws Exception {
+    public void clickLoginButtonOnLoginPage() throws Exception
+    {
         click(elements.getLoginButton(), "Login button" );
+        //return ifErrorOccuredWhileLogging();
+    }
+
+    private boolean ifErrorOccuredWhileLogging()
+    {
+       if (isFailureNotificationPresent() | isIncorrectUsernamePasswordPresent())
+           return true;
+       else
+           return false;
+
     }
 
     public void clickCreateAccountRegisterPage() throws Exception {
@@ -144,21 +160,48 @@ public class AuthorizationPage extends DriverActionUtils{
 
    public boolean isFailureNotificationPresent()
    {
-       return isElementDisplayed(elements.getNotificationNoRegisteredEmailFound(), "No Registerd User Found notification",true);
+       try {
+           if (isElementDisplayed(elements.getNotificationNoRegisteredEmailFound(),
+                   "No Registerd User Found notification", true))
+               return true;
+       }
+       catch (Exception e)
+       {
+           return false;
+       }
+       return false;
    }
 
     public boolean isSuccessNotificationPresent()
     {
-        return isElementDisplayed(elements.getEmailSentNotification(), "No Registerd User Found notification",true);
+        try {
+            if (isElementDisplayed(elements.getEmailSentNotification(), "Email sent successfully",true))
+                return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        return false;
     }
 
     public boolean isSendLinAgainButtonPresent()
     {
-        return isElementDisplayed( elements.getSendMeVerificationLinkAgainButton(), "Send link again button",true);
+        try {
+            if (isElementDisplayed(elements.getSendMeVerificationLinkAgainButton(), "Send link again button",true))
+                return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        return false;
+
     }
 
     public boolean isSendLinkAgainVerificationErrorPageButtonPresent()
     {
+
         return isElementDisplayed( elements.getSendMeLinkAgainOnverificationErrorPage(), "Send link again button",true);
     }
 
@@ -172,6 +215,18 @@ public class AuthorizationPage extends DriverActionUtils{
         return isElementDisplayed( elements.getVerificationErrorMsg(), "Text Msg of verification Link expiry",true);
     }
 
+    public boolean isIncorrectUsernamePasswordPresent()
+    {
+        try {
+            if (isElementDisplayed( elements.getIncorrectUsernamePasswordNotification(), "Incorrect Username Password",true))
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        return false;
+    }
 
 
 

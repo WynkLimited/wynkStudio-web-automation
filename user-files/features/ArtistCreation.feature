@@ -5,8 +5,7 @@ Feature: Artist Creation
   @Regression
   @Sanity
     @artistCreation
-
-    Scenario: Verify Create Or claim artist profile page
+   Scenario: Verify Create Or claim artist profile page
     Given User open Wynk studio Register page
     Then Enter EmailId on Register Page
     And  Enter Password
@@ -25,6 +24,7 @@ Feature: Artist Creation
 
 
   @Regression
+    @artistCreation
     Scenario Outline: Verify click on back button in 'Create Or claim artist profile' page
         Given User open Wynk studio Login page
         Then  Enter Email <type_of_user>
@@ -39,6 +39,8 @@ Feature: Artist Creation
       |RUX         |
 
     @Sanity
+      @Regression
+      @artistCreation
     Scenario Outline: Verify if Artist wants to proceed without filling mandatory fields on Add Artist Details Page
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -56,6 +58,8 @@ Feature: Artist Creation
         |RUX         |
 
     @Smoke
+      @Regression
+      @artistCreation
     Scenario Outline: Verify photo upload functionality by Artist
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -74,6 +78,7 @@ Feature: Artist Creation
 
 
     @Regression @Sanity
+      @artistCreation
     Scenario Outline: Verify if Artist wants to upload more photos
       Given User open Wynk studio Login page
       Then  Enter Email <type_of_user>
@@ -93,6 +98,7 @@ Feature: Artist Creation
         |RUX         |
 
   @Regression
+    @artistCreation
   Scenario Outline: Verify if Artist wants to update existing profile pic
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -113,6 +119,7 @@ Feature: Artist Creation
       |RUX         |
 
   @Regression
+    @artistCreation
   Scenario Outline: Verify if Artist updates photo with wrong extension
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>
@@ -130,18 +137,22 @@ Feature: Artist Creation
 
 
     @Sanity
-    Scenario Outline: Verify that name entered on create or claim artist page is copied on Artist name text box on Add Artist details page
-    Given User open Wynk studio Login page
-    Then  Enter Email <type_of_user>
-    And   Enter Password
-    Then  Click on Login
-    Given Enter name on Create or claim an artist profile page
+      @Regression
+      @artistCreation
+      Scenario Outline: Verify that name entered on create or claim artist page is copied on Artist name text box on Add Artist details page
+      Given User open Wynk studio Login page
+      Then  Enter Email <type_of_user>
+      And   Enter Password
+      Then  Click on Login
+      Given Enter name on Create or claim an artist profile page
       Then Verify the Artist name is same which user entered on Create or claim an artist profile page
       Examples:
         |type_of_user|
         |RUX         |
 
   @Smoke
+    @Regression
+    @artistCreation
   Scenario Outline: Verify that user's profile is created when user clicks on continue after filling out all the mandatory fields
     Given User open Wynk studio Login page
     Then  Enter Email <type_of_user>

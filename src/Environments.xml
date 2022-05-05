@@ -2,14 +2,8 @@
 <ENV>
     <PREPROD>
         <APP_URL>https://studio-test.wynk.in</APP_URL>
-        <API_MASTER_HOST>https://user-rajtv-preprod.wynk.in</API_MASTER_HOST>
-        <LAYOUT_HOST>https://layout-rajtv-preprod.wynk.in/</LAYOUT_HOST>
-        <CONTENT_HOST>https://content-rajtv-preprod.wynk.in/</CONTENT_HOST>
-        <PLAYBACK_HOST>https://play-rajtv-preprod.wynk.in/</PLAYBACK_HOST>
-        <SEARCH_HOST>https://search-rajtv-preprod.wynk.in</SEARCH_HOST>
-        <WCF_HOST>https://wcfpay-new.wynk.in</WCF_HOST>
-        <SYNC_HOST>https://sync-rajtv-preprod.wynk.in</SYNC_HOST>
-        <CMS_HOST>http://cms-preprod.wynk.in</CMS_HOST>
-        <PACKAGE_HOST>https://package-rajtv-preprod.wynk.in</PACKAGE_HOST>
     </PREPROD>
+    <PROD>
+        <APP_URL>https://studio.wynk.in</APP_URL>
+    </PROD>
 </ENV>

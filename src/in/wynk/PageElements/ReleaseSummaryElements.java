@@ -28,6 +28,19 @@ public class ReleaseSummaryElements {
     private By needHelpButtonRejectionState = By.xpath("//button/span[contains(text(),'Need help?')]");
     private By newReleaseInReviewState = By.xpath("//button/p[contains(text(),'New release')]");
     private By inReviewStateText = By.xpath("//div[@class='mt_3']/div");
+    private By textOnFilter = By.xpath("//button/strong[contains(text(),'Last ')]/following-sibling::p");
+    private By uniqueListensTrendsGraph = By.xpath("//div[contains(@id,'Unique Listeners')]//h3");
+    private By totalStreamsTrendsGraph = By.xpath("//div[contains(@id,'Total Streams')]//h3");
+    private By likeTrendsGraph = By.xpath("//div[contains(@id,'Likes')]//h3");
+    private By htActivatedTrendsGraph = By.xpath("//div[contains(@id,'Hellotunes Activated')]//h3");
+    private By graphTrendPage = By.xpath("//canvas[@role='img']");
+    private By crossIconTrendPopUp = By.xpath("//span[contains(@class,'Cross')]//*[name()='svg']");
+    private By rowWiseGraphList = By.xpath("//div[contains(@class,'ChartContainer')]//canvas[1]");
+    private By totalHeader = By.xpath("//thead[@class='ant-table-thead']//tr/th");
+    private By totalSongsCountPageWise = By.xpath("//tbody[@class='ant-table-tbody']//tr");
+
+    private By playButton = By.xpath("//button[contains(@class,'square-icon-btn')]");
+    private By songTitleOnWynkList = By.xpath("//h1[@class='heading1']");
 
 
 

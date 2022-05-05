@@ -5,16 +5,27 @@ import in.wynk.PageElements.DashboardElements;
 import in.wynk.common.DriverActionUtils;
 import in.wynk.framework.Reporting;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Clock;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.time.Month;
+import java.text.SimpleDateFormat;
+import java.text.DateFormatSymbols;
+import java.util.List;
 
 
 public class SongDashboardPage extends DriverActionUtils {
 
     DashboardElements dbElements ;
     HashMap<String, String> dashboardHashMapFroValidation;
-    public HashMap<String, String> songAnalyticsForValidation;
+    //Name of song and it's data
+    public HashMap<String, HashMap<String, String>> songAnalyticsForValidation;
     ArrayList<String> songWhichHasNoDataOnDashBoard ;
 
     ArrayList<String> songWithBrokenArtWork ;
@@ -136,7 +147,14 @@ public class SongDashboardPage extends DriverActionUtils {
 
     public String getTotalStreamsCount()
     {
-        return getElementWhenPresent(dbElements.getTotalNumberTotalStreamsText(), 5).getText();
+        WebElement e = getElementWhenClickable(dbElements.getTotalNumberTotalStreamsText(), 1000);
+
+        if(e!=null)
+        {
+            return getElementWhenPresent(dbElements.getTotalNumberTotalStreamsText(), 5).getText();
+        }
+        return null;
+
     }
 
     public Integer totalSinglesAsPerTableHeading()
@@ -154,16 +172,26 @@ public class SongDashboardPage extends DriverActionUtils {
     {
         int size = songCountOnSinglePage();
         int col = 0;
+        HashMap<String, String> temp = new HashMap<>();
         for(int i =1 ;i<=size;i++)
         {
            col = getDriver().findElements(By.xpath("//tbody[@class='ant-table-tbody']//tr["+i+"]//td")).size();
-           for (int j =1 ;i<=size;i++)
+            String keyValue = getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr[1]//td[1]/div/p")).getText();
+
+            for (int j =2 ;j<=col;j++)
             {
-              String s =  getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr["+i+"]//td["+j+"]/div")).getText();
-                if(s.isEmpty() || s == null)
+               String header = getDriver().findElement(By.xpath("//thead[@class='ant-table-thead']//tr/th["+j+"]")).getText();
+                String value = getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr["+i+"]//td["+j+"]/div")).getText();
+                temp.put(header,value);
+
+                if(value.isEmpty() || value == null)
                 {
-                  String d =  getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr["+i+"]//td[1]/div")).getText();
-                   songWhichHasNoDataOnDashBoard.add(d);
+                    String d =  getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr["+i+"]//td[1]/div")).getText();
+                    songWhichHasNoDataOnDashBoard.add(d);
+                }
+                else {
+
+                    songAnalyticsForValidation.put(keyValue,temp);
                 }
             }
         }
@@ -226,6 +254,10 @@ public class SongDashboardPage extends DriverActionUtils {
         click(dbElements.getLastXDaysDropButton(),"Last X Days Drop down", 5);
     }
 
+    public String getLastXDaysDropDownText()
+    {
+      return getDriver().findElement(dbElements.getLastXDaysDropButton()).getText();
+    }
 
     public void clickLast7DaysFilterInsideDropDown()
     {
@@ -265,33 +297,34 @@ public class SongDashboardPage extends DriverActionUtils {
 
 
 
-    public void clickFirstLiveSongInTable()
+    public boolean clickFirstLiveSongInTable()
     {
         int size = songCountOnSinglePage();
         int col = 0;
+        HashMap<String, String> temp = new HashMap<>();
         if(size>=1)
         {
             col = getWebElementsList(dbElements.getTotalHeader()).size();
-
-            String header = getDriver().findElement(By.xpath("//thead[@class='ant-table-thead']//tr/th[1]")).getText();
-            String value = getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr[1]//td[1]/div/p")).getText();
-            songAnalyticsForValidation.put(header,value);
+            String valueKey = getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr[1]//td[1]/div/p")).getText();
             for (int j =2 ;j<=col;j++)
             {
-
-                 header = getDriver().findElement(By.xpath("//thead[@class='ant-table-thead']//tr/th["+j+"]")).getText();
-                 value = getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr[1]//td["+j+"]/div")).getText();
-                songAnalyticsForValidation.put(header,value);
-
+                String header = getDriver().findElement(By.xpath("//thead[@class='ant-table-thead']//tr/th["+j+"]")).getText();
+                String  value = getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr[1]//td["+j+"]/div")).getText();
+                temp.put(header,value);
                 if(value.isEmpty() || value == null)
                 {
                     String d =  getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr[1]//td[1]/div/p")).getText();
                     songWhichHasNoDataOnDashBoard.add(d);
                 }
-            }
+                else {
+                    songAnalyticsForValidation.put(valueKey, temp);
+                    getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr[1]//td[1]")).click();
+                    return true;
+                }
 
-            getDriver().findElement(By.xpath("//tbody[@class='ant-table-tbody']//tr[1]//td[1]")).click();
+            }
         }
+        return false;
     }
 
     public static enum HeaderName
@@ -322,13 +355,62 @@ public class SongDashboardPage extends DriverActionUtils {
         return null;
     }
 
-
-    public void clickFilterDropdown()
+    public void clickDownloadButton()
     {
-        click(dbElements.getLast7DaysDatesTextDropDown(),"Last x days filter", 5);
+        click(dbElements.getDownloadButton(),"Download button", 5);
+    }
+
+    public void pickDatesRandomlyInCurrentMonth()
+    {
+       List<WebElement> dates =  getDriver().findElements(By.xpath("//div[@class='rdrMonthName'][contains(text(),'"+getCurrentMonth()+"')]/following-sibling::div/button[@class='rdrDay']" +
+               "//span[@class='rdrDayNumber']"));
+
+           dates.get(0).click();
+           dates.get(dates.size()-1).click();
+
+    }
+
+    public String getCurrentMonth()
+    {
+        LocalDate currentdate = LocalDate.now();
+        String[] shortMonths = new DateFormatSymbols().getShortMonths();
+
+        for (int i = 0; i < (shortMonths.length-1); i++)
+        {
+            String shortMonth = shortMonths[i];
+            if(currentdate.getMonth().toString().toLowerCase().contains(shortMonth.toLowerCase()))
+                return shortMonth;
+        }
+        return null;
     }
 
 
+    public void clickDoneButtonInDownloadSection()
+    {
+        WebElement element = getDriver().findElement(By.xpath("//div[@id='modal-container']/div//button/span[contains(text(),'Done')]"));
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
+        click(dbElements.getDoneButton(),"Done button in Download section");
+    }
 
+    public boolean isNotificationMsgForSuccessfulDownloadPresent()
+    {
+       return checkIfElementPresent(dbElements.getNotificationMsgForSuccessfulDownload());
+    }
 
+    public void clickAllTheTimeRadioButton()
+    {
+        click(dbElements.getAllTheTimeDownloadRadioButton(),"All the time button in Download section");
+    }
+
+    public void clickCrossInDownloadSection()
+    {
+        click(dbElements.getCrossDownloadButton(),"Cross button in Download section");
+    }
+
+    public boolean isLastXDaysFilterPresent(int arg)
+    {
+
+       return getDriver().findElement(By.xpath("//button/strong[contains(text(),'Last "+arg+" days')]")).isDisplayed();
+
+    }
     }

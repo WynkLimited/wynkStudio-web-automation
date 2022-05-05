@@ -334,9 +334,9 @@ public class ReleaseCreationSteps {
 
     @Then("Click on dashboard button")
     public void clickOnDashboardButton() {
+
         studioPage.clickDashboardButtonArtistHomePage();
         nameOfPrimaryArtist = studioPage.getNameOfArtistDashBoard();
-
     }
 
     @And("Click on studio home button")
@@ -440,5 +440,17 @@ public class ReleaseCreationSteps {
     @Then("Click on edit button for Release uploaded")
     public void clickOnEditButtonForReleaseUploaded() {
         releaseCreationPage.clickEditButtonForReleaseUploadedButton();
+    }
+
+    @Then("Select Check box for Album Title")
+    public void selectCheckBoxForAlbumTitle() {
+
+        releaseCreationPage.selectAlbumTitleCheckbox();
+    }
+
+    @Then("Enter Publisher Name")
+    public void enterPublisherName() {
+        if(!releaseCreationPage.getPublisherName().isEmpty())
+            releaseCreationPage.enterPublisherName(releaseCreationPage.readPrimaryArtistName());
     }
 }

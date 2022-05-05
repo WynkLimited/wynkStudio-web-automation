@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 @Getter
 public class ArtistHomeElements {
 
-    private By newReleaseButtonArtistPage =By.xpath("//button[@class='ant-btn addReleaseBtn']") ;
+    private By newReleaseButtonArtistPage =By.xpath("//button[contains(@class,'addReleaseB')]") ;
     private By headingOnArtistPage = By.xpath("//div[@class='style__Info-sc-5fcp8g-2 gpSbwf']");
     private By homeButtonArtistPage = By.xpath("//a[@class='Logo__LogoCustom-sc-285esy-0 jIiSUX logo']");
     private By studioButtonArtistPage = By.xpath("//main[@id='app']//a[@href='/home']");

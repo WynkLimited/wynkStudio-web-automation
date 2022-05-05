@@ -17,18 +17,21 @@ public class AuthPageElements {
     private By notificationCrossButton =By.cssSelector(".anticon-close > svg");
     private By fullNameRegisterPage = By.cssSelector("#registerForm_name .ant-input");
     private By emailRegisterPage = By.cssSelector("#registerForm_email .ant-input");
-    private By sendMeVerificationLinkAgainButton = By.xpath("//button[@class='ant-btn style__StyledButton-sc-4pmgzs-0 cgIfa']");
-    private By forgotPasswordLink = By.xpath("//a[@class='style__StyledLink-sc-1hahjst-11 biNXrM passwordText']");
+    private By sendMeVerificationLinkAgainButton = By.xpath("//button/span[contains(text(),'Send me link again')]");
+    private By forgotPasswordLink = By.xpath("//a[contains(text(),'Forgot Password')]");
     private By emaiIdTextBoxForgotPasswordPage = By.xpath("//div[@id='forgotPasswordForm_email']//input");
     private By sendEmailButtonForgotPasswordPage= By.cssSelector(".ant-btn > span");
     private By notificationNoRegisteredEmailFound
-            = By.xpath("//div[@class='ant-notification ant-notification-topRight']//div[contains(text(),'No registered user found with given email')]");
+            = By.xpath("//div[contains(text(),'No registered user found with given email')]");
     private By emailSentNotification =
-            By.xpath("//div[@class='ant-notification ant-notification-topRight']//div[contains(text(),'Email sent successfully')]");
+            By.xpath("//div[contains(text(),'Email sent successfully')]");
 
-    private By verificationErrorMsg = By.xpath("//h5[@class='s3styled__S3-sc-85vhak-0 style__StyledS3-sc-1hahjst-20 kGsEfG cIUfYj'][1]");
+    private By incorrectUsernamePasswordNotification = By.xpath("//div[contains(text(),'Incorrect username or password.')]");
+
+    private By verificationErrorMsg = By.xpath("//h5[contains(text(),'Uh oh! Your verification link has been expired.')]");
     private By sendMeLinkAgainOnverificationErrorPage =
-            By.xpath("//button[@class='ant-btn ant-btn-default ant-btn-round ant-btn-sm ant-btn-block']");
+            By.xpath("//button/span[contains(text(),'Send me link again')]");
+    private By errorMsg = By.xpath("//div[contains(@class,'ant-notification-notice-error')]");
 
 
 }

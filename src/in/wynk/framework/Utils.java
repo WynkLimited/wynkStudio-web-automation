@@ -31,8 +31,6 @@ public class Utils extends DriverActionUtils {
     }
   }
 
-
-
   public void sleep(Long sTime) {
     try {
       Thread.sleep(sTime);
@@ -56,7 +54,7 @@ public class Utils extends DriverActionUtils {
 //            : Boolean.valueOf(Environment.get("getPageSource").trim());
 //    String screenText = "";
 //    if (getPageSource) {
-//      screenText = getDriver().getPageSource();
+//      screenText = Regressioner().getPageSource();
 //    } else {
 //      if (getDriverType().trim().toUpperCase().contains("ANDROID") || getDriverType().trim()
 //          .toUpperCase().contains("CHROME") || getDriverType().trim().toUpperCase()
@@ -172,46 +170,46 @@ public class Utils extends DriverActionUtils {
 //    return flag;
 //  }
 
-  public String readPINFromMessagesCustom(String recieverName) throws Exception {
-    String messageText = readlastMessageText(recieverName);
-    String pin = messageText.replaceAll("\\D+", "");
-    return pin;
-  }
+//  public String readPINFromMessagesCustom(String recieverName) throws Exception {
+//    String messageText = readlastMessageText(recieverName);
+//    String pin = messageText.replaceAll("\\D+", "");
+//    return pin;
+//  }
 
-  public String readlastMessageText(String title, long... time) throws Exception {
-    assert time.length <= 2;
-    long seconds = time.length > 0 ? time[0] : 25;
-    String message = "";
-    boolean devicefarm = Boolean.valueOf(Environment.get("devicefarm"));
-    String output = utils.runCommandUsingTerminal(devicefarm,
-        "adb -s " + Driver.deviceList.get(getDriverType().trim().toUpperCase()).trim()
-            + " shell ps | grep io.appium.networktoggle", false, "1");
-    if (!output.trim().contains("io.appium.networktoggle")) {
-      launchApp("io.appium.networktoggle", "io.appium.networktoggle.MainActivity");
-      utils.runCommandUsingTerminal(devicefarm,
-          "adb -s " + Driver.deviceList.get(getDriverType().trim().toUpperCase()).trim()
-              + " shell ps | grep io.appium.networktoggle", false, "5");
-      sleep(2000L);
-      navigateBack();
-      return message;
-    }
-    if (title.trim().toUpperCase().contains("WYNKED") || title.trim().toUpperCase()
-        .contains("VSIPAY") || title.trim().toUpperCase().contains("AIRAPP") || title.trim()
-        .toUpperCase().contains("AIRINF") || title.trim().toUpperCase().contains("AIRSEP") || title
-        .trim().toUpperCase().contains("CVHTUN")) {
-      try {
-        WebElement alertTitle = getElementWhenVisible(By.id("android:id/alertTitle"), seconds);
-        if (alertTitle.getText().trim().contains(title.trim().toUpperCase())) {
-          WebElement alertMessage = getElementWhenVisible(By.id("android:id/message"));
-          message = alertMessage.getText().trim();
-        }
-        click(By.id("android:id/button1"), "Alert Ok button");
-      } catch (Exception ex) {
-        ex.printStackTrace();
-      }
-    }
-    return message;
-  }
+//  public String readlastMessageText(String title, long... time) throws Exception {
+//    assert time.length <= 2;
+//    long seconds = time.length > 0 ? time[0] : 25;
+//    String message = "";
+//    boolean devicefarm = Boolean.valueOf(Environment.get("devicefarm"));
+//    String output = utils.runCommandUsingTerminal(devicefarm,
+//        "adb -s " + Driver.deviceList.get(RegressionerType().trim().toUpperCase()).trim()
+//            + " shell ps | grep io.appium.networktoggle", false, "1");
+//    if (!output.trim().contains("io.appium.networktoggle")) {
+//      launchApp("io.appium.networktoggle", "io.appium.networktoggle.MainActivity");
+//      utils.runCommandUsingTerminal(devicefarm,
+//          "adb -s " + Driver.deviceList.get(getDriverType().trim().toUpperCase()).trim()
+//              + " shell ps | grep io.appium.networktoggle", false, "5");
+//      sleep(2000L);
+//      navigateBack();
+//      return message;
+//    }
+//    if (title.trim().toUpperCase().contains("WYNKED") || title.trim().toUpperCase()
+//        .contains("VSIPAY") || title.trim().toUpperCase().contains("AIRAPP") || title.trim()
+//        .toUpperCase().contains("AIRINF") || title.trim().toUpperCase().contains("AIRSEP") || title
+//        .trim().toUpperCase().contains("CVHTUN")) {
+//      try {
+//        WebElement alertTitle = getElementWhenVisible(By.id("android:id/alertTitle"), seconds);
+//        if (alertTitle.getText().trim().contains(title.trim().toUpperCase())) {
+//          WebElement alertMessage = getElementWhenVisible(By.id("android:id/message"));
+//          message = alertMessage.getText().trim();
+//        }
+//        click(By.id("android:id/button1"), "Alert Ok button");
+//      } catch (Exception ex) {
+//        ex.printStackTrace();
+//      }
+//    }
+//    return message;
+//  }
 
   public boolean checkIfElementPresent(By locator, long... waitSeconds) {
     assert waitSeconds.length <= 1;
@@ -227,5 +225,27 @@ public class Utils extends DriverActionUtils {
     } finally {
         getDriver().manage().timeouts().implicitlyWait(implicitWait, TimeUnit.SECONDS);
     }
+  }
+
+  public Double convertCountToDouble(String countInString)
+  {
+    if(countInString.contains("k"))
+       return Double.parseDouble(countInString.split("k")[0]);
+
+    else if ((countInString.contains("K")))
+      return Double.parseDouble(countInString.split("K")[0]);
+
+    else if(countInString.contains("m"))
+      return Double.parseDouble(countInString.split("m")[0]);
+
+    else if(countInString.contains("M"))
+      return Double.parseDouble(countInString.split("m")[0]);
+    else {
+      return Double.parseDouble(countInString);
+    }
+
+   // return 0.0;
+
+
   }
 }

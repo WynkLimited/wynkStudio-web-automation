@@ -32,6 +32,7 @@ public class ReleaseCreationElements {
     private By crossButton =By.xpath("//span[contains(@class,'crossIcon')]");
     private By yesForUPC = By.xpath("//span[contains(text(),'Yes, I have UPC')]");
     private By yesForISRC =By.xpath("//span[contains(text(),'Yes, I have ISRC')]");
+    private By albumCheckBox = By.xpath("//label[contains(@class,'albumTitleCheckbox')]/span[contains(@class,'checkbox')]");
 
     //###################### Second Page################################//
 
@@ -66,6 +67,7 @@ public class ReleaseCreationElements {
     private By backArrowSecondPage = By.xpath("//div[@class='arrow-link']");
     private By addLRCFileViaBannerButton = By.xpath("//button[contains(@class,'ant-btn ant-btn-primary ant-btn-sm')]");
     private By invalidURLErrorPreviouslyRelease  = By.xpath("//div[@role='alert'][contains(text(),'valid URL')]");
+    private By publisherName =By.xpath("//p[@id='publisherName']/parent::div/following-sibling::div");
 
 
     //###################### common page ##########################

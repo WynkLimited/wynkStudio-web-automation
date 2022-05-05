@@ -657,5 +657,19 @@ ReleaseCreationElements releaseCreationElements;
       click( releaseCreationElements.getConfirmAndSubmit(),"confirm and submit",5);
    }
 
+   public void selectAlbumTitleCheckbox()
+   {
+       click(releaseCreationElements.getAlbumCheckBox(),"check box for album title",5);
+   }
 
+   public String getPublisherName()
+   {
+     return  getText(releaseCreationElements.getPublisherName(), 5);
+   }
+
+   public void enterPublisherName(String publisherName)
+   {
+       getDriver().findElement(releaseCreationElements.getPublisherName()).clear();
+       click(getDriver().findElement(releaseCreationElements.getPublisherName()),"publisher name",5);
+   }
 }

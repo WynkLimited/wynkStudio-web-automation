@@ -4,6 +4,7 @@ import in.wynk.PageElements.CommonElements;
 import in.wynk.common.DriverActionUtils;
 import in.wynk.framework.Reporting;
 import in.wynk.common.Utils;
+import org.openqa.selenium.By;
 
 public class CommonStudioPage extends DriverActionUtils {
 
@@ -50,6 +51,21 @@ public class CommonStudioPage extends DriverActionUtils {
         return isElementDisplayed( commonElements.getSearchBoxStudioPage(), "All Song Tab",true);
     }
 
+    public void enterSongNameInSearchBox(String songName) throws Exception {
+        type(commonElements.getSearchBoxStudioPage(),"Search Box",songName,5);
+        Thread.sleep(3000);
+
+    }
+
+    public String getInnerHtmlSearchContainer()
+    {
+       return getDriver().findElement(By.xpath("//div[contains(@class,'input-filled')]/div[@class=' search-suggestions-container']")).getAttribute("outerHTML");
+    }
+
+    public void clickFirstSongSearchResult()
+    {
+        getDriver().findElements(By.xpath("//div[contains(@class,'input-filled')]/div[@class=' search-suggestions-container']//p")).get(0).click();
+    }
 
     public String getCountOfAllSongs()
     {
@@ -89,6 +105,21 @@ public class CommonStudioPage extends DriverActionUtils {
         return false;
     }
 
+    public String getCountOfVerificationPendingFromTab()
+    {
+        scrollingToBottomofAPage();
+        return getElementWhenPresent(commonElements.getVerificationPendingText()).getText().split(" ")[1];
+    }
+
+    public boolean clickVerificationPendingSongTab()
+    {
+        if(!getCountOfVerificationPendingFromTab().contains("(0")) {
+            click(commonElements.getVerificationPendingText(), "Verification Pending song tab", 5);
+            return true;
+        }
+        return false;
+    }
+
     public String getCountOfinReviewSongFromTab()
     { scrollingToBottomofAPage();
         return getElementWhenPresent(commonElements.getInReviewTabText()).getText().split(" ")[1];
@@ -119,7 +150,8 @@ public class CommonStudioPage extends DriverActionUtils {
     }
 
     public String getCountOfLiveSongFromTab()
-    { scrollingToBottomofAPage();
+    {
+        scrollingToBottomofAPage();
         return getElementWhenPresent(commonElements.getLiveTabText()).getText().split(" ")[1];
     }
     public boolean clickLiveSongTab()
@@ -133,7 +165,7 @@ public class CommonStudioPage extends DriverActionUtils {
 
     public static enum tabOption
     {
-        ALL, REJECTED, LIVE, INREVIEW, DRAFT;
+        ALL, REJECTED, LIVE, INREVIEW, DRAFT, VERIFICATIONPENDING;
     }
 
 
@@ -151,7 +183,7 @@ public class CommonStudioPage extends DriverActionUtils {
                 }
             case LIVE:
                 if (!getCountOfLiveSongFromTab().contains("(0")) {
-                    clickDraftSongTab();
+                    clickLiveSongTab();
                     return getCountOfLiveSongFromTab().contains(getCountOfAllSongs());
                 }
                 else if (getCountOfLiveSongFromTab().contains("(0")){
@@ -176,12 +208,13 @@ public class CommonStudioPage extends DriverActionUtils {
 
             case DRAFT:
                 if (!getCountOfDraftSongFromTab().contains("(0")) {
-                    clickRejectedSongTab();
+                    clickDraftSongTab();
                     return getCountOfDraftSongFromTab().contains(getCountOfAllSongs());
                 }
                 else if (getCountOfDraftSongFromTab().contains("(0")){
                     return true;
                 }
+
         }
         return false;
     }
@@ -194,9 +227,19 @@ public class CommonStudioPage extends DriverActionUtils {
         String a=getWebElementsList(commonElements.getSongNameOnTilesTextList()).get(0).getText();
         if(getTotalSongs()>=1)
         getWebElementsList(commonElements.getCountSongsAllTab()).get(0).click();
-
         return a;
     }
 
+
+    public void clickCrossSignInSearchBar()
+    {
+       click( commonElements.getCrossSign(),"cross sign", 5);
+    }
+
+
+ public boolean isNoSearchResultFoundPresent() throws InterruptedException {
+     Thread.sleep(3000);
+   return   checkIfElementPresent(commonElements.getNoSearchResult(),5);
+ }
 
 }

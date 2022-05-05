@@ -69,13 +69,13 @@ public class ArtistCreationSteps {
 
 
     @Then("Assert List size of Artists in Drop down is greater then zero")
-    public void assertListSizeOfArtistsInDropDownIsGreaterThenZero() {
+    public void assertListSizeOfArtistsInDropDownIsGreaterThenZero() throws InterruptedException {
         Assert.assertTrue("Nothing coming as the name of artist is searched ",
                 (createArtistPage.getSizeOfListOfArtistInDropDown()>=1));
     }
 
     @And("Select a non-claimed Artist from drop down")
-    public void selectANonClaimedArtistFromDropDown() {
+    public void selectANonClaimedArtistFromDropDown() throws InterruptedException {
         createArtistPage.clickFirstNonClaimedArtistFound();
     }
 
